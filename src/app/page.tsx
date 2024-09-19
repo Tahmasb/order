@@ -1,9 +1,3 @@
-import Button from "@elements/Button";
-
 export default function Home() {
-  return (
-    <div>
-      <Button />
-    </div>
-  );
+  return <div>Home</div>;
 }

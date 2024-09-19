@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import fontDana from "@utils/font";
+import Header from "@modules/Header";
 
 export const metadata: Metadata = {
   title: "سفارش تابلو",
@@ -13,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body>{children}</body>
+      <body className={`${fontDana.variable} font-dana`}>
+        <Header />
+        {children}
+        <footer>footer</footer>
+      </body>
     </html>
   );
 }

@@ -26,6 +26,7 @@
       "@pages/*": ["src/components/pages/*"],
       "@svgs/*": ["src/components/svgs/*"],
       "@utils/*": ["src/utils/*"],
+      "@src/*": ["src/*"],
       "@slices/*": ["src/redux/slices/*"]
     }
   },
