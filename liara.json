@@ -1,0 +1,7 @@
+{
+    "build": {
+        "location": "germany"
+    },
+    "platform": "next",
+    "app": "order"
+}
