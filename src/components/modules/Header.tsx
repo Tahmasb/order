@@ -1,7 +1,6 @@
 "use client";
 import { RxHamburgerMenu } from "react-icons/rx";
-import Button from "@elements/Button";
-import { headerItems } from "@utils/staticData";
+import { headerItems, headerItemsDrawer } from "@utils/staticData";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,14 +8,16 @@ import { useState } from "react";
 import Drawer from "@elements/Drawer";
 
 const logo = (
-  <Image
-    src={"/images/logo.svg"}
-    alt="سفارش تابلو"
-    width={100}
-    className="h-12 w-24"
-    priority
-    height={0}
-  />
+  <Link href={"/"}>
+    <Image
+      src={"/images/logo.svg"}
+      alt="سفارش تابلو"
+      width={100}
+      className="h-12 w-24"
+      priority
+      height={0}
+    />
+  </Link>
 );
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -25,10 +26,10 @@ const Header = () => {
   const handleCloseDrawer = () => setDrawerOpen(false);
   const handleOpenDrawer = () => setDrawerOpen(true);
   return (
-    <header className=" py-4 flex items-center justify-between px-4">
+    <header className=" bg-white sticky top-0 w-full border-b py-2.5 flex items-center justify-between px-4">
       {logo}
       <div className="md:flex hidden gap-7 ">
-        {headerItems.map((link, index) => {
+        {headerItems.map((link) => {
           const isCurrentItem = "/" + pathName.split("/")[1] === link.href;
           return (
             <Link
@@ -36,30 +37,34 @@ const Header = () => {
               key={link.href}
               className={`${
                 isCurrentItem && "text-primary"
-              }  font-medium text-lg`}
+              }  font-medium text-lg hover:text-secondary-hover transition-all`}
             >
               {link.label}
             </Link>
           );
         })}
       </div>
-      <Button className="hidden md:flex">سفارش تابلو</Button>
+      <Link href={"/add-order"} className="hidden md:flex custom-link">
+        سفارش تابلو
+      </Link>
       <RxHamburgerMenu
         onClick={handleOpenDrawer}
         className="text-2xl md:hidden cursor-pointer "
       />
       <Drawer open={drawerOpen} onClose={handleCloseDrawer}>
-        <div className="w-48 p-3 h-full  flex flex-col gap-4">
+        <div className="w-72 py-3 px-5 h-full flex flex-col gap-4">
           {logo}
-          <div className="flex flex-col gap-4 ">
-            {headerItems.map((link, index) => {
+          <div className="flex flex-col child:border-b child:py-3 ">
+            {headerItemsDrawer.map((link) => {
               return (
                 <Link
                   onClick={handleCloseDrawer}
                   href={link.href}
                   key={link.href}
+                  className="flex items-center gap-2.5 hover:text-primary hover:mr-2 transition-all duration-200"
                 >
-                  {link.label}
+                  <span>{link.icon}</span>
+                  <span>{link.label}</span>
                 </Link>
               );
             })}

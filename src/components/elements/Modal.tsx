@@ -27,7 +27,7 @@ const Modal: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div
-            onClick={(e) => handleClose}
+            onClick={handleClose}
             className="absolute inset-0 bg-gray-500 opacity-75"
           ></div>
         </div>

@@ -13,7 +13,7 @@ const NotFound = () => {
         width={400}
         height={400}
         priority
-        alt="radin"
+        alt="رزرو تابلو"
       />
     </div>
   );
