@@ -13,14 +13,14 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   label,
   className,
-  rows = 9,
+  rows = 8,
 }) => {
   const { register } = useFormContext();
 
   return (
     <div className={cn("rounded-lg bg-white relative", className || "")}>
       <textarea
-        className="focus:border-primary-1 h-full border -mb-2.5 rounded-lg w-full  peer resize-none bg-transparent p-2 outline-none overflow-hidden"
+        className="focus:border-primary h-full border-secondary border -mb-2.5 rounded-lg w-full  peer resize-none bg-transparent p-2 outline-none overflow-hidden"
         {...register(name)}
         rows={rows}
       />

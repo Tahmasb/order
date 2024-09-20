@@ -8,7 +8,12 @@ import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 
 const ContactUsPage = () => {
-  const handleAddTicket = (values: {}) => {
+  const handleAddTicket = (values: {
+    fullName: string;
+    phone: string;
+    subject: string;
+    message: string;
+  }) => {
     console.log(values);
   };
   const methods = useForm({
@@ -20,10 +25,10 @@ const ContactUsPage = () => {
     },
   });
   return (
-    <div className="flex ">
+    <div className="flex flex-col md:flex-row ">
       <FormProvider {...methods}>
         <form
-          className=" w-7/12 flex flex-col gap-5 p-4"
+          className="w-full md:w-7/12 flex flex-col gap-5 p-4"
           onSubmit={methods.handleSubmit(handleAddTicket)}
         >
           <span className="font-bold text-lg">با ما در ارتباط باشید</span>
@@ -36,13 +41,13 @@ const ContactUsPage = () => {
           </div>
         </form>
       </FormProvider>
-      <div className="w-5/12 flex flex-col gap-10 py-8 items-center">
+      <div className="w-full md:w-5/12 flex flex-col gap-10 py-8 items-center">
         <Image
           src={"/images/contact.svg"}
           width={200}
           height={200}
           alt="سفارش تابلو چنلیوم"
-          className="w-full h-80"
+          className="w-full h-80 hidden md:flex"
         />
         <div className="flex flex-col gap-4">
           <div className="flex gap-5">

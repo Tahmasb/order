@@ -26,7 +26,7 @@ export default function RootLayout({
       />
       <body className={`${fontDana.variable} font-dana`}>
         <Header />
-        {children}
+        <div className="min-h-[60vh]">{children}</div>
         <Footer />
       </body>
     </html>

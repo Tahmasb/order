@@ -79,8 +79,8 @@ const Input: React.FC<InputProps> = ({
         placeholder=" "
         id={uniqueId}
         className="
-          peer p-2 rounded-lg outline-none w-full h-full bg-inherit 
-           focus:border-[1px] focus:border-primary-1 
+          peer p-2 rounded-lg border-secondary border outline-none w-full h-full bg-inherit 
+           focus:border-[1px] focus:border-primary 
           transition-colors duration-300
         "
       />

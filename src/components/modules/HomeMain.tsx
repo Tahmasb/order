@@ -5,7 +5,7 @@ const HomeMain = () => {
   return (
     <div className="flex my-12 w-full md:child:w-1/2 items-center px-5 gap-1 md:flex-row flex-col">
       <Image
-        src={"/images/HomeMain.svg"}
+        src={"/images/homeMain.svg"}
         width={300}
         height={0}
         className="w-full h-[420px]"

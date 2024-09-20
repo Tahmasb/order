@@ -1,5 +1,7 @@
+import AboutUsPage from "@pages/AboutUsPage";
+
 const AboutUs = () => {
-  return <div>about us</div>;
+  return <AboutUsPage />;
 };
 
 export default AboutUs;

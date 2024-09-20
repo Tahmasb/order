@@ -26,7 +26,7 @@ const Header = () => {
   const handleCloseDrawer = () => setDrawerOpen(false);
   const handleOpenDrawer = () => setDrawerOpen(true);
   return (
-    <header className=" bg-white sticky top-0 w-full border-b py-2.5 flex items-center justify-between px-4">
+    <header className=" z-20 shadow-lg bg-white sticky top-0 w-full border-b py-2.5 flex items-center justify-between px-4">
       {logo}
       <div className="md:flex hidden gap-7 ">
         {headerItems.map((link) => {
@@ -37,7 +37,7 @@ const Header = () => {
               key={link.href}
               className={`${
                 isCurrentItem && "text-primary"
-              }  font-medium text-lg hover:text-secondary-hover transition-all`}
+              }  font-medium hover:text-secondary-hover transition-all`}
             >
               {link.label}
             </Link>
