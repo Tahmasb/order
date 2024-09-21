@@ -1,4 +1,5 @@
 "use client";
+import Autocomplete from "@elements/Autocomplete";
 import Button from "@elements/Button";
 import Input from "@elements/Input";
 import Link from "next/link";
@@ -29,11 +30,19 @@ const RegisterPage = () => {
         <Input label="تلفن همراه" name="phone" />
         <Input name="password" label="رمزعبور" />
         <Input name="rePassword" label="تکرار رمزعبور" />
-
+        <Autocomplete
+          className=""
+          label="استان شما"
+          name="state"
+          options={[
+            { label: "اول", value: 1 },
+            { label: "دوم", value: 2 },
+          ]}
+        />
         <Link className="text-sm mr-auto text-blue-700" href={"/register"}>
           قبلا ثبت‌نام کردید؟ وارد شوید
         </Link>
-        <Button>ثبت نام</Button>
+        <Button type="submit">ثبت نام</Button>
       </form>
     </FormProvider>
   );

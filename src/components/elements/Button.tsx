@@ -22,6 +22,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   variant?: "contained" | "outlined";
   className?: string;
+  type?: "button" | "submit";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
