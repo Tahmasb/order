@@ -1,6 +1,6 @@
 const AboutUsPage = () => {
   return (
-    <div className="max-w-[1000px] mx-auto my-10 gap-5 flex flex-col">
+    <div className="max-w-[1000px] px-2 mx-auto my-10 gap-5 flex flex-col">
       <span className="font-bold text-xl">درباره ما</span>
       <p className="text-justify">
         ما در &quot;تابلو باما&quot; با افتخار به شما کمک می‌کنیم تا تابلوهایی

@@ -17,7 +17,7 @@ const headerItemsDrawer = [
   { href: "/blogs", label: "وبلاگ", icon: <IoNewspaper /> },
   { href: "/about-us", label: "درباره ما", icon: <GrInfo /> },
   { href: "/login", label: "ورود", icon: <IoIosLogIn /> },
-  { href: "//add-order", label: "سفارش تابلو", icon: <FaCartShopping /> },
+  { href: "/add-order", label: "سفارش تابلو", icon: <FaCartShopping /> },
   { href: "/contact-us", label: "تماس با ما", icon: <MdSupportAgent /> },
 ];
 

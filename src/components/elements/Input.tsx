@@ -92,7 +92,7 @@ const Input: React.FC<InputProps> = ({
       <label
         htmlFor={uniqueId}
         className="
-          absolute right-3 -top-3 text-gray-500 transition-all duration-300
+          absolute right-3 bg-white -top-3 text-gray-500 transition-all duration-300
           peer-placeholder-shown:top-2 peer-placeholder-shown:right-3 
           peer-placeholder-shown:text-black-2 peer-focus:-top-3 
           peer-focus:right-3 peer-focus:text-primary-1 text-sm 

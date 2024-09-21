@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 
 type Option = {
   label: string;
-  value: string | number;
+  id: string | number;
 };
 
 interface AutocompleteProps {
@@ -42,7 +42,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
   const handleOptionSelect = (
     option: Option,
-    onChange: (value: any) => void
+    onChange: (value: object) => void
   ) => {
     setIsOpen(false);
     setInputValue(option.label); // نمایش نام گزینه در اینپوت
@@ -79,10 +79,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               className="w-full px-3 py-2 focus:border-primary border border-secondary  rounded-lg shadow-sm outline-none disabled:bg-gray-100"
             />
             {isOpen && (
-              <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-md max-h-48 overflow-y-auto">
+              <ul className="absolute z-20 w-full bg-white border border-gray-300 rounded-md max-h-48 overflow-y-auto">
                 {filteredOptions.map((option) => (
                   <li
-                    key={option.value}
+                    key={option.id}
                     className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
                     onMouseDown={() =>
                       handleOptionSelect(option, field.onChange)

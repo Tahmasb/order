@@ -56,10 +56,18 @@ const ContactUsPage = () => {
           </div>
           <div className="flex gap-3">
             <span>شبکه‌های اجتمائی: </span>
-            <a href="" className="text-[#0dc143] text-2xl">
+            <a
+              href="https://wa.me/989112076139"
+              target="_blank"
+              className="text-[#0dc143] text-2xl"
+            >
               <FaWhatsapp />
             </a>
-            <a href="" className="text-[#269eda] text-2xl">
+            <a
+              target="_blank"
+              href="https://t.me/+989112076139"
+              className="text-[#269eda] text-2xl"
+            >
               <FaTelegramPlane />
             </a>
           </div>
