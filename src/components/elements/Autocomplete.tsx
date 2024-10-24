@@ -1,96 +1,182 @@
 import { cn } from "@utils/style";
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFormContext, Controller } from "react-hook-form";
+import { IoIosArrowDown, IoMdClose } from "react-icons/io";
+import { OptionItemType } from "../types";
 
-type Option = {
-  label: string;
-  id: string | number;
-};
-
-interface AutocompleteProps {
-  label: string;
+type AutocompleteProps = {
+  label?: string;
   name: string;
-  options: Option[];
-  disabled?: boolean;
+  options: OptionItemType[];
   className?: string;
-}
+  disabled?: boolean;
+  showChild?: boolean;
+};
 
 const Autocomplete: React.FC<AutocompleteProps> = ({
   label,
   name,
-  options,
+  options = [],
   className,
   disabled = false,
+  showChild = true,
 }) => {
-  const { control } = useFormContext();
-  const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+  const {
+    control,
+    formState: { errors },
+    setValue,
+  } = useFormContext();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [filteredOptions, setFilteredOptions] = useState(options);
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<string>(""); // حالت جدا برای مدیریت مقدار اینپوت
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleInputChange = (value: string) => {
-    setInputValue(value); // تنظیم مقدار اینپوت برای تایپ
+    if (inputRef.current) {
+      inputRef.current.value = value || "";
+    }
+    setSelectedIndex(-1);
     if (value) {
       setFilteredOptions(
         options.filter((option) =>
-          option.label.toLowerCase().includes(value.toLowerCase())
+          String(option.label).toLowerCase().includes(value?.toLowerCase())
         )
       );
     } else {
-      setFilteredOptions(options); // بازگرداندن تمام آیتم‌ها در صورت پاک شدن ورودی
+      setFilteredOptions(options);
     }
   };
 
   const handleOptionSelect = (
-    option: Option,
-    onChange: (value: object) => void
+    option: OptionItemType,
+    onChange: (value: any) => void
   ) => {
     setIsOpen(false);
-    setInputValue(option.label); // نمایش نام گزینه در اینپوت
-    onChange(option); // ذخیره کل آبجکت انتخابی
+    if (inputRef.current) {
+      inputRef.current.value = option.label.toString();
+    }
+    onChange(option);
   };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    onChange: (value: any) => void
+  ) => {
+    if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : 0
+      );
+    } else if (e.key === "ArrowUp") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : filteredOptions.length - 1
+      );
+    } else if (e.key === "Enter" && selectedIndex >= 0) {
+      handleOptionSelect(filteredOptions[selectedIndex], onChange);
+    }
+  };
+
+  const clearInput = (onChange: (value: any) => void) => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+    onChange(null);
+    setFilteredOptions(options);
+  };
+
+  // useEffects
+
+  useEffect(() => {
+    if (options.length > 0) {
+      const defaultOption = options.find((option) => option.isDefault);
+      if (defaultOption) {
+        if (inputRef.current) {
+          inputRef.current.value = defaultOption.label.toString();
+        }
+        setValue(name, defaultOption);
+      }
+      setFilteredOptions(options);
+    }
+  }, [options]);
 
   return (
     <div
-      // className="flex flex-col w-full"
       className={cn(
-        "flex flex-col w-full relative rounded-lg",
-        className || ""
+        "bg-white my-1 flex-col max-w-[18rem] relative w-full h-10 rounded-md",
+        className || "",
+        disabled ? "bg-background-4" : "",
+        showChild ? "flex" : "hidden"
       )}
     >
-      <label className="z-10 px-1.5 right-2.5 bg-white bottom-8  text-sm font-medium text-gray-700 absolute">
-        {label}
-      </label>
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <div className="relative">
+          <div className="relative h-full focus-within:border-primary hover:border-primary transition flex flex-col border rounded-md">
+            <label
+              className={cn(
+                "absolute  text-gray-500 right-3 text-sm bg-inherit top-2 pointer-events-none transition-all duration-300",
+                inputRef.current?.value
+                  ? "text-[13px] -top-3 px-1 bg-white"
+                  : "top-1.5 "
+              )}
+            >
+              {label}
+            </label>
             <input
               type="text"
               autoComplete="off"
-              value={inputValue} // استفاده از حالت برای کنترل مقدار اینپوت
-              onClick={() => setIsOpen(true)} //* باز کردن منو هنگام کلیک */}
+              ref={inputRef}
+              onClick={() => setIsOpen(true)}
+              onFocus={() => setIsOpen(true)}
               onChange={(e) => {
-                handleInputChange(e.target.value);
+                handleInputChange(e.target?.value);
                 field.onChange(null); // پاک کردن مقدار آبجکت انتخاب‌شده در فرم هنگام تایپ
               }}
-              onBlur={() => setTimeout(() => setIsOpen(false), 150)} //* بستن منو با کمی تأخیر هنگام خارج شدن از اینپوت */}
+              onKeyDown={(e) => handleKeyDown(e, field.onChange)}
+              onBlur={() => setTimeout(() => setIsOpen(false), 150)}
               disabled={disabled}
-              className="w-full px-3 py-2 focus:border-primary border border-secondary  rounded-lg shadow-sm outline-none disabled:bg-gray-100"
+              placeholder=" "
+              className="w-full h-full bg-transparent px-3 py-2 focus:outline-none focus:ring-0 rounded-md shadow-sm"
             />
+            {inputRef.current?.value && isOpen && (
+              <IoMdClose
+                className="absolute left-11 text-gray-500 top-[34%] cursor-pointer"
+                onClick={() => clearInput(field.onChange)}
+              />
+            )}
+            {errors[name] && (
+              <small className="text-primary mr-1">
+                {String(errors[name].message)}
+              </small>
+            )}
+
+            <IoIosArrowDown
+              onClick={() => setIsOpen(!isOpen)}
+              className={`absolute cursor-pointer text-gray-500 transition left-5 top-[34%] ${
+                isOpen && "rotate-180"
+              } `}
+            />
+
             {isOpen && (
-              <ul className="absolute z-20 w-full bg-white border border-gray-300 rounded-md max-h-48 overflow-y-auto">
-                {filteredOptions.map((option) => (
+              <ul className="absolute mt-10 shadow-md z-20 w-full bg-white border divide-y border-gray-300 rounded-md max-h-48 overflow-y-auto">
+                {filteredOptions.map((option, index) => (
                   <li
                     key={option.id}
-                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                    className={cn(
+                      "px-4 py-2 hover:bg-gray-200 cursor-pointer",
+                      selectedIndex === index ? "bg-gray-300" : ""
+                    )}
                     onMouseDown={() =>
                       handleOptionSelect(option, field.onChange)
-                    } //* ذخیره کل آبجکت */}
+                    }
                   >
                     {option.label}
                   </li>
                 ))}
+                {filteredOptions.length < 1 && (
+                  <li className="px-4 py-2">آیتمی یافت نشد</li>
+                )}
               </ul>
             )}
           </div>

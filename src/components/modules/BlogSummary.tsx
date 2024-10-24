@@ -1,33 +1,34 @@
+import { blogs } from "@utils/staticDataLarge";
 import Image from "next/image";
+import Link from "next/link";
 
 const BlogSummary = () => {
   return (
     <div className="mt-16 flex flex-col gap-8 items-center">
       <h1 className="font-bold text-xl">آخرین مقالات تابلو باما</h1>
       <div className="grid  gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3].map((blog) => {
+        {blogs.map((blog) => {
           return (
-            <a
-              href="/"
-              key={blog}
-              className="border flex flex-col gap-3 p-2.5 hover:shadow-lg transition-all hover:scale-105 duration-300"
+            <Link
+              href={`/blogs/${blog.href}`}
+              key={blog.href}
+              className="border flex flex-col gap-3 hover:shadow-lg transition-all hover:scale-105 duration-300"
             >
               <Image
                 alt="سفارش تابلو چنلیوم"
-                src={"/images/homeMain.svg"}
+                src={blog.image}
                 width={300}
                 height={0}
+                className="w-80 h-48 object-cover"
               />
-              <div className="flex flex-col gap-2">
-                <p className="font-semibold">
-                  عنوان مقاله که باید اینجا قرار بگیرد
-                </p>
+              <div className="flex flex-col p-2.5  gap-2">
+                <p className="font-semibold">{blog.title}</p>
                 <div className="flex justify-between font-light">
-                  <small>دسته بندی فلان</small>
+                  <small>دسته بندی {blog.category}</small>
                   <small>1404/03/24</small>
                 </div>
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

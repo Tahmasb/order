@@ -1,5 +1,7 @@
+import BlogSummary from "@modules/BlogSummary";
+
 const Blogs = () => {
-  return <div>blogs</div>;
+  return <BlogSummary />;
 };
 
 export default Blogs;

@@ -21,4 +21,23 @@ const headerItemsDrawer = [
   { href: "/contact-us", label: "تماس با ما", icon: <MdSupportAgent /> },
 ];
 
-export { headerItems, headerItemsDrawer };
+const ordersType = [
+  { id: 1, label: "حروف چنلیوم" },
+  { id: 2, label: "پلاستیک" },
+  { id: 3, label: "لبه سوئدی" },
+  { id: 4, label: "لبه سوئدی مکس" },
+  { id: 5, label: "تابلو روان" },
+  { id: 6, label: "بیلبورد" },
+];
+const costAmountOptions = [
+  { id: 1, label: "زیر ۲ میلیون تومان" },
+  { id: 2, label: "2 تا 5 میلیون تومان" },
+  { id: 3, label: "۵ تا ۱۰ میلیون تومان" },
+  { id: 4, label: "۱۰ تا ۱۵ میلیون تومان" },
+  { id: 5, label: "۱۵ تا ۲۰ میلیون تومان" },
+  { id: 6, label: "۲۰ تا ۳۰ میلیون تومان" },
+  { id: 7, label: "۳۰ تا ۴۰ میلیون تومان" },
+  { id: 8, label: "بالای ۴۰ میلیون تومان" },
+];
+
+export { headerItems, headerItemsDrawer, ordersType, costAmountOptions };

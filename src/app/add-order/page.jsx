@@ -1,5 +1,7 @@
+import AddOrderPage from "@pages/AddOrderPage";
+
 const AddOrder = () => {
-  return <div>add order</div>;
+  return <AddOrderPage />;
 };
 
 export default AddOrder;

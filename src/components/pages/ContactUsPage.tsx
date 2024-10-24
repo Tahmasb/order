@@ -47,7 +47,7 @@ const ContactUsPage = () => {
           width={200}
           height={200}
           alt="سفارش تابلو چنلیوم"
-          className="w-full h-80 hidden md:flex"
+          className="w-full h-96 hidden md:flex"
         />
         <div className="flex flex-col gap-4">
           <div className="flex gap-5">

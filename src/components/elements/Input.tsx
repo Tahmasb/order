@@ -6,7 +6,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 
 const input = cva(
-  "bg-white my-1 border flex flex-col relative w-full h-10 rounded-lg"
+  "bg-white my-1 max-w-[18rem] flex flex-col relative w-full h-10 rounded-md"
 );
 
 const formatNumber = (value: string, digits: number): string => {
@@ -79,8 +79,8 @@ const Input: React.FC<InputProps> = ({
         placeholder=" "
         id={uniqueId}
         className="
-          peer p-2 rounded-lg border-secondary border outline-none w-full h-full bg-inherit 
-           focus:border-[1px] focus:border-primary 
+          peer p-2 rounded-md outline-none w-full h-full bg-inherit 
+           focus:border-[1px] hover:border-primary border focus:border-primary 
           transition-colors duration-300
         "
       />
@@ -92,11 +92,10 @@ const Input: React.FC<InputProps> = ({
       <label
         htmlFor={uniqueId}
         className="
-          absolute right-3 bg-white -top-3 text-gray-500 transition-all duration-300
+          absolute right-3 -top-3 text-gray-500 transition-all duration-300
           peer-placeholder-shown:top-2 peer-placeholder-shown:right-3 
           peer-placeholder-shown:text-black-2 peer-focus:-top-3 
-          peer-focus:right-3 peer-focus:text-primary-1 text-sm 
-         peer-focus:bg-white  rounded-md px-1  
+          peer-focus:right-3 bg-white peer-focus:text-primary-1 text-sm rounded-md px-1  
         "
       >
         {label}

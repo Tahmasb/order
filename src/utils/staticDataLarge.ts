@@ -1224,4 +1224,28 @@ const states = [
   },
 ];
 
-export { cities, states };
+const blogs = [
+  {
+    href: "chelnium",
+    title: "تابلو چلنیوم چیست؟",
+    category: "انواع تابلوها",
+    image:
+      "https://rice.storage.iran.liara.space/order/%DA%86%D9%86%D9%84%DB%8C%D9%88%D9%85.jpg",
+  },
+  {
+    href: "neon",
+    title: "تابلو نئون چیست؟",
+    category: "انواع تابلو‌ها",
+    image:
+      "https://rice.storage.iran.liara.space/order/%D9%86%D8%A6%D9%88%D9%86.jpg",
+  },
+  {
+    href: "swedish-edge",
+    title: "تابلو لبه سوئدی چیست؟",
+    category: "انواع تابلو‌ها",
+    image:
+      "https://rice.storage.iran.liara.space/order/%D9%84%D8%A8%D9%87%20%D8%B3%D9%88%D8%A6%D8%AF%DB%8C.jpg",
+  },
+];
+
+export { cities, states, blogs };

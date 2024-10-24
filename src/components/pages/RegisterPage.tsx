@@ -7,13 +7,21 @@ import Link from "next/link";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { useMemo } from "react";
 
+interface IRegisterForm {
+  fullName: string;
+  phone: string;
+  password: string;
+  state: { id: number; label: string };
+  city: string;
+}
+
 const RegisterPage = () => {
-  const methods = useForm({
+  const methods = useForm<IRegisterForm>({
     defaultValues: {
       fullName: "",
       phone: "",
       password: "",
-      state: "",
+      state: {},
       city: "",
     },
   });
@@ -22,13 +30,11 @@ const RegisterPage = () => {
     console.log(values);
   };
 
-  // Watching the selected state
-  const selectedState: any = useWatch({
+  const selectedState = useWatch({
     name: "state",
     control: methods.control,
   });
 
-  // Filter cities based on selected state
   const filteredCities = useMemo(() => {
     return cities.filter((city) => city.stateId === selectedState?.id);
   }, [selectedState]);
@@ -44,9 +50,7 @@ const RegisterPage = () => {
         <Input label="تلفن همراه" name="phone" />
         <Input name="password" label="رمزعبور" />
         <Autocomplete label="استان شما" name="state" options={states} />
-
-        {/* Conditionally show the city input based on selected state */}
-        {selectedState && (
+        {selectedState?.label && (
           <Autocomplete label="شهر" name="city" options={filteredCities} />
         )}
 

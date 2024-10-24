@@ -7,9 +7,12 @@ const userSchema = new Schema(
       default: "USER",
       enum: ["USER", "ADMIN"],
     },
-    fullName: {
+    firstName: {
       type: String,
       required: true,
+    },
+    lastName: {
+      type: String,
     },
     phone: {
       type: String,
@@ -26,7 +29,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 // add index
