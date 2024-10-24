@@ -13,7 +13,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   label,
   className,
-  rows = 8,
+  rows = 6,
 }) => {
   const { register } = useFormContext();
 

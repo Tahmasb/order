@@ -72,6 +72,7 @@ const Input: React.FC<InputProps> = ({
     <div className={cn(input(), className || "")}>
       <input
         autoFocus={autoFocus}
+        autoComplete="off"
         disabled={disabled}
         type={type === "password" ? inputType : type}
         {...register(name)}
@@ -85,8 +86,8 @@ const Input: React.FC<InputProps> = ({
         "
       />
       {errors[name] && (
-        <small className="text-red-1 mr-1">
-          {errors[name]?.message as string}
+        <small className="text-error mr-1">
+          {String(errors[name].message)}
         </small>
       )}
       <label

@@ -23,10 +23,10 @@ const userSchema = new Schema(
       required: true,
     },
     state: {
-      type: String,
+      type: Object,
     },
     city: {
-      type: String,
+      type: Object,
     },
   },
   { timestamps: true, versionKey: false }

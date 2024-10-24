@@ -25,14 +25,14 @@ const ContactUsPage = () => {
     },
   });
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex flex-col md:flex-row items-center">
       <FormProvider {...methods}>
         <form
           className="w-full md:w-7/12 flex flex-col gap-5 p-4"
           onSubmit={methods.handleSubmit(handleAddTicket)}
         >
           <span className="font-bold text-lg">با ما در ارتباط باشید</span>
-          <div className="w-full flex flex-col gap-3.5">
+          <div className="w-full flex flex-col gap-3.5 child:min-w-full last:child:min-w-min">
             <Input name="fullName" autoFocus label="نام و نام‌خانوادگی" />
             <Input name="phone" label="شماره همراه" />
             <Input name="subject" label="موضوع" />

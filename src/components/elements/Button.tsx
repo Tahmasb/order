@@ -37,7 +37,7 @@ const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <button
-      disabled={disabled}
+      disabled={disabled || isLoading}
       type={type}
       onClick={type === "submit" ? undefined : onClick}
       className={cn(button({ variant }), className || "")}

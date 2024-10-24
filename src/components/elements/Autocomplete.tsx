@@ -146,7 +146,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               />
             )}
             {errors[name] && (
-              <small className="text-primary mr-1">
+              <small className="text-error mr-1">
                 {String(errors[name].message)}
               </small>
             )}

@@ -24,10 +24,11 @@
       "@modules/*": ["src/components/modules/*"],
       "@providers/*": ["src/components/providers/*"],
       "@pages/*": ["src/components/pages/*"],
+      "@hooks/*": ["src/components/hooks/*"],
       "@svgs/*": ["src/components/svgs/*"],
       "@utils/*": ["src/utils/*"],
-      "@src/*": ["src/*"],
-      "@slices/*": ["src/redux/slices/*"]
+      "@models/*": ["src/models/*"],
+      "@redux/*": ["src/redux/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

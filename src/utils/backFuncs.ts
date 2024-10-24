@@ -1,3 +1,5 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import { AnySchema } from "yup";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { hash, compare } from "bcryptjs";
@@ -22,7 +24,7 @@ async function verifyPassword(password: string, hashedPassword: string) {
 const successResponse = (
   statusCode = 200,
   message = "عملیات موفق",
-  data: object | undefined | string
+  data?: object | undefined | string
 ) => {
   return NextResponse.json({ data, message }, { status: statusCode });
 };
@@ -30,13 +32,45 @@ const successResponse = (
 const errorResponse = (
   statusCode = 400,
   message = "مشکلی رخ داده است",
-  data: object | undefined | string
+  data?: object | undefined | string
 ) => {
   return NextResponse.json({ message, data }, { status: statusCode });
 };
 
+interface ErrorDetail {
+  id: string;
+  label: string;
+}
+
+import * as yup from "yup";
+
+type ValidationError = {
+  id: string;
+  label: string;
+};
+
+async function validateData(
+  schema: yup.ObjectSchema<any>,
+  data: any
+): Promise<true | ValidationError[]> {
+  try {
+    await schema.validate(data, { abortEarly: false });
+    return true;
+  } catch (err) {
+    if (err instanceof yup.ValidationError) {
+      const errors: ValidationError[] = err.inner.map((error) => ({
+        id: error.path || "",
+        label: error.message,
+      }));
+      return errors;
+    }
+    throw err;
+  }
+}
+
 export {
   hashPassword,
+  validateData,
   verifyPassword,
   connectDB,
   errorResponse,
