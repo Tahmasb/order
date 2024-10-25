@@ -7,12 +7,9 @@ const userSchema = new Schema(
       default: "USER",
       enum: ["USER", "ADMIN"],
     },
-    firstName: {
+    fullName: {
       type: String,
       required: true,
-    },
-    lastName: {
-      type: String,
     },
     phone: {
       type: String,
@@ -27,6 +24,10 @@ const userSchema = new Schema(
     },
     city: {
       type: Object,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true, versionKey: false }

@@ -12,6 +12,7 @@ const authOptions: NextAuthOptions = {
         phone: { label: "Phone", type: "text" },
         password: { label: "Password", type: "password" },
       },
+      //@ts-ignore
       async authorize(credentials) {
         if (!credentials) {
           throw new Error("Missing credentials");
@@ -41,11 +42,7 @@ const authOptions: NextAuthOptions = {
           throw new Error("رمز عبور اشتباه است");
         }
 
-        return {
-          id: user._id.toString(),
-          name: user.name,
-          phone: user.phone,
-        };
+        return { email: user.phone, name: user.fullName, image: user.role };
       },
     }),
   ],

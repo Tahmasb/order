@@ -2,10 +2,6 @@ import { Schema, model, models } from "mongoose";
 
 const requestSchema = new Schema(
   {
-    phone: {
-      type: String,
-      required: true,
-    },
     image: {
       type: String,
     },
@@ -16,12 +12,13 @@ const requestSchema = new Schema(
       type: Object,
       required: true,
     },
-    fullName: {
-      type: String,
-    },
     costAmount: {
       type: Number,
       required: true,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true, versionKey: false }

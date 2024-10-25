@@ -128,7 +128,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             </label>
             <input
               type="text"
-              autoComplete="off"
+              autoComplete="new-password"
               ref={inputRef}
               onClick={() => setIsOpen(true)}
               onFocus={() => setIsOpen(true)}

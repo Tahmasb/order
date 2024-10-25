@@ -16,8 +16,7 @@ import { setMessage } from "@redux/slices/message";
 import { useRouter } from "next/navigation";
 
 interface RegisterForm {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   phone: string;
   password: string;
   state: OptionItemType | null;
@@ -30,10 +29,6 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const methods = useForm<RegisterForm>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      password: "",
       state: null,
       city: null,
     },
@@ -75,8 +70,7 @@ const RegisterPage = () => {
         className="flex flex-col child:max-w-full w-80 gap-5 items-center mt-6 mx-auto"
       >
         <span className="font-semibold text-lg">ثبت نام</span>
-        <Input autoFocus label="نام" name="firstName" />
-        <Input label="نام خانوادگی" name="lastName" />
+        <Input autoFocus label="نام و نام خانوادگی" name="fullName" />
         <InputNumber maxLength={11} label="تلفن همراه" name="phone" />
         <Input name="password" type="password" label="رمزعبور" />
         <Autocomplete label="استان شما" name="state" options={states} />
@@ -87,7 +81,9 @@ const RegisterPage = () => {
         <Link className="text-sm -mt-1.5  text-blue-700" href={"/login"}>
           قبلا ثبت‌نام کردید؟ وارد شوید
         </Link>
-        <Button type="submit">ثبت نام</Button>
+        <Button isLoading={isLoadingButton} type="submit">
+          ثبت نام
+        </Button>
       </form>
     </FormProvider>
   );

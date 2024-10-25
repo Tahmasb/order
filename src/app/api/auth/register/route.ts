@@ -12,11 +12,9 @@ import { registerSchema } from "@utils/validations";
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    const { firstName, lastName, phone, password, state, city } =
-      await req.json();
+    const { fullName, phone, password, state, city } = await req.json();
     const validateBodyData = await yupValidateData(registerSchema, {
-      firstName,
-      lastName,
+      fullName,
       phone,
       password,
       state,
@@ -36,8 +34,7 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await hashPassword(password);
 
     const newUser = await User.create({
-      firstName,
-      lastName,
+      fullName,
       state,
       city,
       password: hashedPassword,

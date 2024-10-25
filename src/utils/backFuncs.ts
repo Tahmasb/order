@@ -29,8 +29,8 @@ const successResponse = (
 };
 
 const errorResponse = (
-  statusCode = 400,
-  message = "مشکلی رخ داده است",
+  statusCode = 500,
+  message = "مشکلی در سرور رخ داده است",
   data?: object | undefined | string
 ) => {
   return NextResponse.json({ message, data }, { status: statusCode });

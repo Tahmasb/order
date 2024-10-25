@@ -6,6 +6,7 @@ import Header from "@modules/Header";
 import Footer from "@modules/Footer";
 import ReduxProvider from "@providers/ReduxProvider";
 import ElementOnAllPages from "@elements/ElementOnAllPage";
+import NextAuthProvider from "@providers/NextAuthProvider";
 
 export const metadata: Metadata = {
   title: "سفارش تابلو",
@@ -30,10 +31,12 @@ export default function RootLayout({
         className={`${fontDana.variable} min-h-screen font-dana flex flex-col  max-w-[1500px] mx-auto`}
       >
         <ReduxProvider>
-          <Header />
-          <div className="p-2">{children}</div>
-          <Footer />
-          <ElementOnAllPages />
+          <NextAuthProvider>
+            <Header />
+            <div className="p-2">{children}</div>
+            <Footer />
+            <ElementOnAllPages />
+          </NextAuthProvider>
         </ReduxProvider>
       </body>
     </html>
