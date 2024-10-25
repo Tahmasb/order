@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Header />
-          <div>{children}</div>
+          <div className="p-2">{children}</div>
           <Footer />
           <ElementOnAllPages />
         </ReduxProvider>

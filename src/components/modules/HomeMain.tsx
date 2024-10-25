@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const HomeMain = () => {
   return (
-    <div className="flex my-12 w-full md:child:w-1/2 items-center px-5 gap-1 md:flex-row flex-col">
+    <div className="flex my-8 w-full md:child:w-1/2 items-center px-5 gap-1 md:flex-row flex-col">
       <Image
         src={"/images/homeMain.svg"}
         width={300}

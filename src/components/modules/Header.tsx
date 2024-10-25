@@ -56,12 +56,15 @@ const Header = () => {
           {logo}
           <div className="flex flex-col child:border-b child:py-3 ">
             {headerItemsDrawer.map((link) => {
+              const isCurrentItem = "/" + pathName.split("/")[1] === link.href;
               return (
                 <Link
                   onClick={handleCloseDrawer}
                   href={link.href}
                   key={link.href}
-                  className="flex items-center gap-2.5 hover:text-primary hover:mr-2 transition-all duration-200"
+                  className={`${
+                    isCurrentItem && "text-primary"
+                  } flex items-center gap-2.5 hover:text-secondary hover:mr-2 transition-all duration-200`}
                 >
                   <span>{link.icon}</span>
                   <span>{link.label}</span>
