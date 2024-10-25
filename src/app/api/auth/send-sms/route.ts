@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    let { phone, code } = await req.json();
+    const { phone, code } = await req.json();
     await connectDB();
     const isCorrectCode = await OTP.findOne({ phone, code });
     if (isCorrectCode) {

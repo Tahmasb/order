@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
         description,
         image,
       });
-      let code = Math.floor(10000 + Math.random() * 90000).toString();
+      const code = Math.floor(10000 + Math.random() * 90000).toString();
       const otp = await OTP.create({ phone, code });
       const response = await sendSMS(phone, code);
       console.log(response);
@@ -80,8 +80,13 @@ export async function POST(req: NextRequest) {
       }
       return errorResponse(500, "مشکلی در ارسال پیامک رخ داده است");
     }
-  } catch (error) {
-    console.log(error.message);
-    return errorResponse();
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      return errorResponse(500, error.message);
+    } else {
+      console.log("Unknown error", error);
+      return errorResponse(500, "An unknown error occurred");
+    }
   }
 }

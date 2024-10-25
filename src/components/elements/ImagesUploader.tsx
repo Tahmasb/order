@@ -1,6 +1,6 @@
 "use client";
 import { FaPlus } from "react-icons/fa6";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useFormContext } from "react-hook-form";
@@ -44,14 +44,24 @@ const ImagesUploader: React.FC<UploaderArrayProps> = ({
         const newImages = [...oldImages, data.image_url];
         setValue(name, newImages);
         dispatch(setMessage({ message: data.data }));
-      } catch (error: any) {
-        console.log(error.response);
-        dispatch(
-          setMessage({
-            message: error.response.data.data,
-            severity: "error",
-          })
-        );
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.log(error.response);
+          dispatch(
+            setMessage({
+              message: error.response?.data?.data || "An error occurred",
+              severity: "error",
+            })
+          );
+        } else {
+          console.error("Unexpected error:", error);
+          dispatch(
+            setMessage({
+              message: "An unexpected error occurred",
+              severity: "error",
+            })
+          );
+        }
       } finally {
         // پاک کردن مقدار input بعد از آپلود
         if (e.target) {
