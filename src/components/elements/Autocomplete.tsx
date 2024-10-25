@@ -50,7 +50,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
   const handleOptionSelect = (
     option: OptionItemType,
-    onChange: (value: any) => void
+    onChange: (value: OptionItemType | null) => void
   ) => {
     setIsOpen(false);
     if (inputRef.current) {
@@ -61,8 +61,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    onChange: (value: any) => void
+    onChange: (value: OptionItemType | null) => void
   ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
     if (e.key === "ArrowDown") {
       setSelectedIndex((prevIndex) =>
         prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : 0
@@ -76,7 +79,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     }
   };
 
-  const clearInput = (onChange: (value: any) => void) => {
+  const clearInput = (onChange: (value: OptionItemType | null) => void) => {
     if (inputRef.current) {
       inputRef.current.value = "";
     }

@@ -33,6 +33,7 @@ const addOrderSchema = object().shape({
     .required("شماره همراه ضروری است"),
   type: object().required("نوع درخواست ضروری است"),
   costAmount: object().required("انتخاب محدوده هزینه ضروری است"),
+  description: string(),
 });
 
 export { registerSchema, loginSchema, addOrderSchema };

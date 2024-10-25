@@ -5,7 +5,7 @@ import {
   errorResponse,
   hashPassword,
   successResponse,
-  validateData,
+  yupValidateData,
 } from "@utils/backFuncs";
 import { registerSchema } from "@utils/validations";
 
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     await connectDB();
     const { firstName, lastName, phone, password, state, city } =
       await req.json();
-    const validateBodyData = await validateData(registerSchema, {
+    const validateBodyData = await yupValidateData(registerSchema, {
       firstName,
       lastName,
       phone,

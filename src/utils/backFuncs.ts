@@ -1,5 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { AnySchema } from "yup";
+import * as yup from "yup";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { hash, compare } from "bcryptjs";
@@ -37,21 +36,14 @@ const errorResponse = (
   return NextResponse.json({ message, data }, { status: statusCode });
 };
 
-interface ErrorDetail {
-  id: string;
-  label: string;
-}
-
-import * as yup from "yup";
-
 type ValidationError = {
   id: string;
   label: string;
 };
 
-async function validateData(
-  schema: yup.ObjectSchema<any>,
-  data: any
+async function yupValidateData<T extends yup.AnyObject>(
+  schema: yup.ObjectSchema<T>,
+  data: T
 ): Promise<true | ValidationError[]> {
   try {
     await schema.validate(data, { abortEarly: false });
@@ -70,7 +62,7 @@ async function validateData(
 
 export {
   hashPassword,
-  validateData,
+  yupValidateData,
   verifyPassword,
   connectDB,
   errorResponse,

@@ -1,7 +1,6 @@
 import { successResponse } from "@utils/backFuncs";
-import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   return successResponse(200, "لیست آیتم‌ها", {
     name: "danyal",
     family: "akbari",

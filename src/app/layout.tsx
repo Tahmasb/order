@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import fontDana from "@utils/font";
 import Header from "@modules/Header";
-import Script from "next/script";
+// import Script from "next/script";
 import Footer from "@modules/Footer";
 import ReduxProvider from "@providers/ReduxProvider";
 import ElementOnAllPages from "@elements/ElementOnAllPage";
