@@ -1,6 +1,6 @@
 "use client";
 import { FaPlus } from "react-icons/fa6";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useFormContext } from "react-hook-form";
@@ -36,14 +36,11 @@ const ImagesUploader: React.FC<UploaderArrayProps> = ({
       formData.append("file", file);
 
       try {
-        const { data } = await axios.post(
-          "https://radintablo.com/api/image-upload",
-          formData
-        );
+        const { data } = await axios.post("/api/upload-image", formData);
         const oldImages = values || [];
-        const newImages = [...oldImages, data.image_url];
+        const newImages = [...oldImages, data.data.image_url];
         setValue(name, newImages);
-        dispatch(setMessage({ message: data.data }));
+        dispatch(setMessage({ message: data.message }));
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           console.log(error.response);

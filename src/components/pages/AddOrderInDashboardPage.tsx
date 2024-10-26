@@ -68,7 +68,11 @@ const AddOrderInDashboardPage = () => {
         <small className="-mt-3">
           آپلود تصاویر از طرح سفارشی شما (اختیاری)
         </small>
-        <Button isLoading={isLoadingButton} type="submit">
+        <Button
+          className="hover:w-72 duration-500"
+          isLoading={isLoadingButton}
+          type="submit"
+        >
           ثبت درخواست مشاوره
         </Button>
       </form>

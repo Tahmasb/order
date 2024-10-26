@@ -5,8 +5,8 @@ import { useId, useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 
-const input = cva(
-  "bg-white my-1 max-w-[18rem] flex flex-col relative w-full h-10 rounded-md"
+const baseClassNames = cva(
+  " bg-white my-1 flex flex-col max-w-[18rem] relative w-full h-10 rounded-md"
 );
 
 const formatNumber = (value: string, digits: number): string => {
@@ -31,7 +31,7 @@ const Input: React.FC<InputProps> = ({
   label,
   type = "text",
   autoFocus = false,
-  className,
+  className = "",
   disabled = false,
   separateNum,
 }) => {
@@ -69,7 +69,7 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className={cn(input(), className || "")}>
+    <div className={cn(baseClassNames(), className)}>
       <input
         autoFocus={autoFocus}
         autoComplete="off"

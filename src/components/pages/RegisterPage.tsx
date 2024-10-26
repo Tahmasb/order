@@ -81,7 +81,11 @@ const RegisterPage = () => {
         <Link className="text-sm -mt-1.5  text-blue-700" href={"/login"}>
           قبلا ثبت‌نام کردید؟ وارد شوید
         </Link>
-        <Button isLoading={isLoadingButton} type="submit">
+        <Button
+          className="hover:w-full duration-500"
+          isLoading={isLoadingButton}
+          type="submit"
+        >
           ثبت نام
         </Button>
       </form>

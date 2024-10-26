@@ -25,12 +25,9 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
-    faq: {
-      type: [{ id: String, answer: String, question: String }],
-    },
     category: {
-      type: Object,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Category",
     },
     main: {
       type: String,

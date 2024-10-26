@@ -48,9 +48,9 @@ const LoginPage = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(handleLogin)}
-        className="flex flex-col child:max-w-full px-3 w-80 gap-5 items-center mt-20 mx-auto"
+        className="flex flex-col px-3 w-80 gap-5 items-center mt-20 mx-auto"
       >
-        <span className="font-semibold text-lg">ورود</span>
+        <span className="font-semibold text-lg text-center">ورود</span>
         <InputNumber
           autoFocus
           maxLength={11}
@@ -63,7 +63,11 @@ const LoginPage = () => {
             حساب ندارید؟ ثبت نام کنید
           </Link>
         </div>
-        <Button isLoading={isLoadingButton} type="submit">
+        <Button
+          className="hover:w-full duration-500"
+          isLoading={isLoadingButton}
+          type="submit"
+        >
           ورود
         </Button>
       </form>

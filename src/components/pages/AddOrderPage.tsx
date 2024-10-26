@@ -89,7 +89,11 @@ const AddOrderPage = () => {
           name="description"
           label="توضیحاتی که فکر میکنید لازم است (اختیاری)"
         />
-        <Button isLoading={isLoadingButton} type="submit">
+        <Button
+          isLoading={isLoadingButton}
+          type="submit"
+          className="hover:w-72 duration-500"
+        >
           ثبت درخواست مشاوره
         </Button>
       </form>
