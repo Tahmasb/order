@@ -20,3 +20,7 @@
 .custom-link {
   @apply bg-primary text-white hover:bg-primary-hover py-1 px-[10px] rounded-lg w-36 h-10 items-center justify-center transition-all;
 }
+
+.heading {
+  @apply text-lg font-semibold whitespace-nowrap;
+}

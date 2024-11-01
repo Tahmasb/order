@@ -1,5 +1,5 @@
 import { cn } from "@utils/style";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import { IoIosArrowDown, IoMdClose } from "react-icons/io";
 import { OptionItemType } from "../types";

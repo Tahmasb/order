@@ -2,13 +2,12 @@ import { Schema, model, models } from "mongoose";
 
 const categorySchema = new Schema(
   {
-    title: {
+    label: {
       type: String,
       required: true,
     },
     image: {
       type: String,
-      required: true,
     },
     href: {
       type: String,

@@ -46,4 +46,23 @@ const verifyPhoneCodeSchema = object().shape({
   code: string().required("ضروری"),
 });
 
-export { registerSchema, loginSchema, addOrderSchema, verifyPhoneCodeSchema };
+const addCategorySchema = object().shape({
+  label: string()
+    .min(3, "عنوان دسته بندی حداقل ۳ کاراکتر")
+    .required("عنوان دسته بندی ضروری است"),
+  href: string()
+    .min(2, "آدرس دسته بندی حداقل دو کاراکتر")
+    .required("آدرس دسته بندی ضروری است"),
+  description: string()
+    .min(10, "توضیحات دسته بندی حداقل 10 کاراکتر")
+    .required("توضیحات دسته بندی ضروری است"),
+  image: string(),
+});
+
+export {
+  registerSchema,
+  loginSchema,
+  addOrderSchema,
+  verifyPhoneCodeSchema,
+  addCategorySchema,
+};

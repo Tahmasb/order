@@ -16,7 +16,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
   open,
   onClose,
   severity = "success",
-  autoHideDuration = 8000,
+  autoHideDuration = 18000,
   message = "عملیات با موفقیت انجام شد",
 }) => {
   useEffect(() => {

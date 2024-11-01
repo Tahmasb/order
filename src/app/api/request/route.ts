@@ -41,7 +41,6 @@ export async function POST(req: NextRequest) {
       return errorResponse(400, "اطلاعات نامعتبر", validateBody);
     }
     const isExistUser = await User.findOne({ phone });
-    console.log("ok first line");
 
     if (isExistUser) {
       const newRequest = await Request.create({

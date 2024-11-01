@@ -3,3 +3,13 @@ export type OptionItemType = {
   label: string | number;
   isDefault?: boolean;
 };
+
+export interface ErrorResponse {
+  response: {
+    statusCode: number;
+    message: string;
+    data?: {
+      message: string;
+    };
+  };
+}

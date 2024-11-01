@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (file.size > 30000) {
+  if (file.size > 300000) {
     return errorResponse(400, "سایز عکس حداکثر باید 300 کیلوبایت باشد");
   }
 

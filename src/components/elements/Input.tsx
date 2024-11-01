@@ -24,6 +24,7 @@ interface InputProps {
   className?: string;
   disabled?: boolean;
   separateNum?: number;
+  urlSafe?: boolean; // پراپ جدید برای کنترل ورودی URL-safe
 }
 
 const Input: React.FC<InputProps> = ({
@@ -34,6 +35,7 @@ const Input: React.FC<InputProps> = ({
   className = "",
   disabled = false,
   separateNum,
+  urlSafe = false, // مقدار پیش‌فرض false
 }) => {
   const [inputType, setInputType] = useState<string>(type);
   const uniqueId = useId();
@@ -56,6 +58,11 @@ const Input: React.FC<InputProps> = ({
     value = value
       .replace(persianDigits, replaceDigits)
       .replace(arabicDigits, replaceDigits);
+
+    // بررسی اینکه اگر urlSafe فعال است، کاراکترهای غیرمجاز حذف شوند
+    if (urlSafe) {
+      value = value.replace(/[^a-zA-Z0-9-_.~]/g, "");
+    }
 
     if (type === "number" && separateNum) {
       const newValue = formatNumber(value, separateNum);

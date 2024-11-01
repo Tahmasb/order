@@ -7,6 +7,7 @@ import { useFormContext } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { setMessage } from "@redux/slices/message";
 import { cn } from "@utils/style";
+import { ErrorResponse } from "../types";
 
 interface SingleImageUploaderProps {
   label?: string;
@@ -39,26 +40,18 @@ const SingleImageUploader: React.FC<SingleImageUploaderProps> = ({
         const { data } = await axios.post("/api/upload-image", formData);
         setValue(name, data.data.image_url); // ذخیره لینک عکس جدید
         dispatch(setMessage({ message: data.message }));
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-          console.log(error.response);
-          dispatch(
-            setMessage({
-              message: error.response?.data?.data || "An error occurred",
-              severity: "error",
-            })
-          );
-        } else {
-          console.error("Unexpected error:", error);
-          dispatch(
-            setMessage({
-              message: "An unexpected error occurred",
-              severity: "error",
-            })
-          );
-        }
+      } catch (error) {
+        console.error("Unexpected error:", error);
+        const message =
+          (error as ErrorResponse)?.response?.data?.message ||
+          "مشکلی در ذخیره تصویر رخ داد";
+        dispatch(
+          setMessage({
+            message,
+            severity: "error",
+          })
+        );
       } finally {
-        // پاک کردن مقدار input بعد از آپلود
         if (e.target) {
           e.target.value = "";
         }
@@ -67,7 +60,7 @@ const SingleImageUploader: React.FC<SingleImageUploaderProps> = ({
   };
 
   const handleDelete = () => {
-    setValue(name, null); // حذف تصویر
+    setValue(name, null);
   };
 
   return (
@@ -77,7 +70,7 @@ const SingleImageUploader: React.FC<SingleImageUploaderProps> = ({
           <AiOutlineDelete
             onClick={handleDelete}
             title="حذف تصویر"
-            className="absolute cursor-pointer inset-0 m-auto text-xl"
+            className="absolute bg-white rounded cursor-pointer inset-0 m-auto text-xl"
           />
           <Image
             className="w-16 h-16 rounded-lg"

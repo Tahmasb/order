@@ -35,13 +35,9 @@ const blogSchema = new Schema(
     },
     published: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     redirect: {
-      type: Boolean,
-      default: false,
-    },
-    redirectPath: {
       type: String,
       default: "",
     },

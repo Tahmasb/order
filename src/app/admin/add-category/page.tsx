@@ -1,5 +1,7 @@
+import AddCategoryPage from "@pages/AddCategoryPage";
+
 const AddCategory = () => {
-  return <div>a</div>;
+  return <AddCategoryPage />;
 };
 
 export default AddCategory;
