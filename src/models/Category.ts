@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const categorySchema = new Schema(
   {
-    label: {
+    title: {
       type: String,
       required: true,
     },
@@ -10,7 +10,7 @@ const categorySchema = new Schema(
       type: String,
       required: true,
     },
-    id: {
+    href: {
       type: String,
       required: true,
       index: {

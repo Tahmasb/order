@@ -6,7 +6,7 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
-    url: {
+    href: {
       type: String,
       required: true,
       index: {
@@ -21,17 +21,13 @@ const blogSchema = new Schema(
     image: {
       type: String,
     },
-    imageAlt: {
+    main: {
       type: String,
       required: true,
     },
     category: {
       type: Schema.Types.ObjectId,
       ref: "Category",
-    },
-    main: {
-      type: String,
-      required: true,
     },
     userId: {
       type: Schema.Types.ObjectId,

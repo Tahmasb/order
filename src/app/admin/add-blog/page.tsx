@@ -1,5 +1,7 @@
+import AddBlogPage from "@pages/AddBlogPage";
+
 const AddBlog = () => {
-  return <div>add blog page</div>;
+  return <AddBlogPage />;
 };
 
 export default AddBlog;
