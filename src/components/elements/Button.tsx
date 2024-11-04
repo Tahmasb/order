@@ -3,7 +3,7 @@ import { cn } from "@utils/style";
 import { cva } from "class-variance-authority";
 
 const button = cva(
-  "border whitespace-nowrap  min-w-max flex items-center justify-center py-1 px-[10px] max-w-[18rem] h-10 w-[140px] transition-all rounded-lg",
+  "border outline-none whitespace-nowrap  min-w-max flex items-center justify-center py-1 px-[10px] max-w-[18rem] h-10 w-[140px] transition-all rounded-lg",
   {
     variants: {
       variant: {
@@ -37,13 +37,13 @@ const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <button
-      disabled={disabled || isLoading}
+      disabled={isLoading || disabled}
       type={type}
       onClick={type === "submit" ? undefined : onClick}
       className={cn(
         button({ variant }),
         className,
-        disabled
+        disabled || isLoading
           ? "bg-gray-600 hover:bg-gray-600 hover:w-[140px] cursor-default"
           : ""
       )}

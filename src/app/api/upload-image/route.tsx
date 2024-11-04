@@ -15,11 +15,11 @@ export async function POST(req: NextRequest) {
     return errorResponse(400, "لطفا عکس را انتخاب کنید");
   }
 
-  const imageExtensions = /\.(png|jpg|webp)$/;
+  const imageExtensions = /\.(png|jpg|webp|jpeg)$/;
   if (!imageExtensions.test(file.name)) {
     return errorResponse(
       400,
-      "عکس فقط باید از این موارد باشد (png, jpg, webp)"
+      "عکس فقط باید از این موارد باشد (png, jpeg, jpg, webpو )"
     );
   }
 

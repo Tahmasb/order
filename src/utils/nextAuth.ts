@@ -42,7 +42,7 @@ const authOptions: NextAuthOptions = {
           throw new Error("رمز عبور اشتباه است");
         }
 
-        return { email: user.phone, name: user.fullName, image: user.role };
+        return { email: user._id, name: user.fullName, image: user.role };
       },
     }),
   ],

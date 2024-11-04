@@ -51,8 +51,8 @@ const AddCategoryPage = () => {
         >
           <ShowErrors errors={responseErrors} />
           <SingleImageUploader name="image" label="تصویر دسته بندی" />
-          <Input name="href" urlSafe label="لینک دسته بندی" />
-          <Input name="label" autoFocus label="عنوان دسته بندی" />
+          <Input name="href" autoFocus urlSafe label="لینک دسته بندی" />
+          <Input name="label" label="عنوان دسته بندی" />
           <Input name="description" label="توضیحات دسته بندی" />
           <Button type="submit" isLoading={isLoadingButton}>
             افزودن مقاله

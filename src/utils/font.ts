@@ -15,8 +15,12 @@ const fontDana = localFont({
       weight: "500",
     },
     {
-      path: "../../public/fonts/DanaFaNum-Bold.ttf",
+      path: "../../public/fonts/DanaFaNum-DemiBold.ttf",
       weight: "600",
+    },
+    {
+      path: "../../public/fonts/DanaFaNum-Bold.ttf",
+      weight: "700",
     },
   ],
   display: "swap",

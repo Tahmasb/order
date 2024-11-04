@@ -15,27 +15,36 @@ const TextArea: React.FC<TextAreaProps> = ({
   className,
   rows = 5,
 }) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div
       className={cn(
-        "bg-white my-1 max-w-[18rem] flex flex-col relative w-full rounded-md",
+        "bg-white my-1 max-w-[18rem] flex  gap-3 flex-col relative w-full rounded-md",
         className || ""
       )}
     >
       <textarea
-        className="focus:border-primary hover:border-primary transition h-full border -mb-2.5 rounded-md w-full  peer resize-none bg-transparent p-2 outline-none overflow-hidden"
+        className="focus:border-primary hover:border-primary transition h-full border -mb-2.5 rounded-md w-full peer resize-none bg-transparent p-2 outline-none overflow-hidden"
         {...register(name)}
         rows={rows}
+        placeholder=" "
       />
+      {errors[name] && (
+        <small className="text-error mr-1">
+          {String(errors[name].message)}
+        </small>
+      )}
       <label
         className="
           absolute right-3 -top-3 text-black-2 transition-all duration-300
+          text-sm bg-white rounded-md px-1  
           peer-placeholder-shown:top-2.5 peer-placeholder-shown:right-3 
           peer-placeholder-shown:text-black-2 peer-focus:-top-3 
-          peer-focus:right-3 peer-focus:text-primary-1 text-sm 
-         peer-focus:bg-white  bg-white rounded-md px-1  
+          peer-focus:right-3 
         "
       >
         {label}

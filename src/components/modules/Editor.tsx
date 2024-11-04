@@ -30,7 +30,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
         onBlur={(newContent) => onChange(newContent)}
         config={config}
       />
-      {error && <span>{error.message}</span>}
+      {error && <span className="text-sm text-error">{error.message}</span>}
     </div>
   );
 };

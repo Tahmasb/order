@@ -59,7 +59,33 @@ const addCategorySchema = object().shape({
   image: string(),
 });
 
+const addBlogSchemaFront = object().shape({
+  image: string()
+    .url("لینک تصویر نامعتبر است")
+    .matches(
+      /\.(png|jpg|webp|jpeg)$/i,
+      "فرمت تصویر باید jpg،jpeg، png یا webp باشد"
+    )
+    .required("تصویر اصلی مقاله ضروری است"),
+  title: string()
+    .min(35, "عنوان مقاله حداقل ۳۵ کاراکتر")
+    .max(60, "عنوان مقاله حداکثر ۶۰ کاراکتر")
+    .required("عنوان مقاله ضروری است"),
+  category: object().required("دسته بندی مقاله ضروری است"),
+  href: string()
+    .min(3, "آدرس مقاله حداقل ۳ کاراکتر")
+    .required("آدرس مقاله ضروری است"),
+  metaDescription: string()
+    .min(100, "توضیحات متا حداقل 100 کاراکتر")
+    .max(200, "توضیحات متا حداکثر 200 کاراکتر")
+    .required("توضیحات متا دسکریپشن ضروری است"),
+  main: string()
+    .min(10, "محتوای اصلی حداقل ۱۰ کاراکتر")
+    .required("محتوای اصلی مقاله ضروری است"),
+});
+
 export {
+  addBlogSchemaFront,
   registerSchema,
   loginSchema,
   addOrderSchema,

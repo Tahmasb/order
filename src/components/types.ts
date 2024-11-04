@@ -13,3 +13,24 @@ export interface ErrorResponse {
     };
   };
 }
+
+export type Context = {
+  params: {
+    blogId: string;
+  };
+};
+
+export type BlogDataProps = {
+  _id: string;
+  title: string;
+  href: string;
+  metaDescription: string;
+  image: string;
+  main: string;
+  category: {
+    label: string;
+    href: string;
+  };
+  redirect: string;
+  createdAt: string;
+};

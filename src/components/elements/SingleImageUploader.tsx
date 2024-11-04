@@ -82,19 +82,26 @@ const SingleImageUploader: React.FC<SingleImageUploaderProps> = ({
           />
         </div>
       ) : (
-        <div
-          title={label}
-          className="flex border border-dashed border-gray-500 bg-white cursor-pointer relative rounded-lg w-16 h-16 items-center justify-center"
-        >
-          <p className="absolute text-gray-400">
-            <FaPlus />
-          </p>
-          <input
-            type="file"
+        <div className="flex flex-col items-center gap-1">
+          <div
             title={label}
-            className="opacity-0 cursor-pointer w-full h-full"
-            onChange={handleImageChange}
-          />
+            className="flex border border-dashed border-gray-500 bg-white cursor-pointer relative rounded-lg w-16 h-16 items-center justify-center"
+          >
+            <p className="absolute text-gray-400">
+              <FaPlus />
+            </p>
+            <input
+              type="file"
+              title={label}
+              className="opacity-0 cursor-pointer w-full h-full"
+              onChange={handleImageChange}
+            />
+          </div>
+          {errors[name] && (
+            <small className="text-error mr-1 whitespace-nowrap">
+              {String(errors[name].message)}
+            </small>
+          )}
         </div>
       )}
     </div>

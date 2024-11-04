@@ -103,7 +103,7 @@ const Input: React.FC<InputProps> = ({
           absolute right-3 -top-3 text-gray-500 transition-all duration-300
           peer-placeholder-shown:top-2 peer-placeholder-shown:right-3 
           peer-placeholder-shown:text-black-2 peer-focus:-top-3 
-          peer-focus:right-3 bg-white peer-focus:text-primary-1 text-sm rounded-md px-1  
+          peer-focus:right-3 bg-white text-sm rounded-md px-1  
         "
       >
         {label}
