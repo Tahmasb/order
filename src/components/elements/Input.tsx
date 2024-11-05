@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
   className = "",
   disabled = false,
   separateNum,
-  urlSafe = false, // مقدار پیش‌فرض false
+  urlSafe = false,
 }) => {
   const [inputType, setInputType] = useState<string>(type);
   const uniqueId = useId();

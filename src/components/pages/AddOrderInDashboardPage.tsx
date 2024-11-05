@@ -5,7 +5,7 @@ import ImagesUploader from "@elements/ImagesUploader";
 import TextArea from "@elements/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
 import { setMessage } from "@redux/slices/message";
-import myAxios from "@utils/axios";
+import { myAxios } from "@utils/axios";
 import { costAmountOptions, ordersType } from "@utils/staticData";
 import { addOrderSchema } from "@utils/validations";
 import { useRouter } from "next/navigation";

@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import Category from "./Category";
 
 const blogSchema = new Schema(
   {
@@ -27,7 +28,8 @@ const blogSchema = new Schema(
     },
     category: {
       type: Schema.Types.ObjectId,
-      ref: "Category",
+      ref: Category.modelName,
+      required: true,
     },
     userId: {
       type: Schema.Types.ObjectId,

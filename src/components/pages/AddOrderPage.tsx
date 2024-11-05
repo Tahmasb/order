@@ -6,7 +6,7 @@ import InputNumber from "@elements/InputNumber";
 import TextArea from "@elements/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
 import { setMessage } from "@redux/slices/message";
-import myAxios from "@utils/axios";
+import { myAxios } from "@utils/axios";
 import { costAmountOptions, ordersType } from "@utils/staticData";
 import { cities, states } from "@utils/staticDataLarge";
 import { addOrderSchema } from "@utils/validations";

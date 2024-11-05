@@ -25,7 +25,7 @@ const successResponse = (
   message = "عملیات موفق",
   data?: object | undefined | string
 ) => {
-  return NextResponse.json({ data, message }, { status: statusCode });
+  return NextResponse.json({ data, message, status: statusCode });
 };
 
 const errorResponse = (
@@ -33,7 +33,7 @@ const errorResponse = (
   message = "مشکلی در سرور رخ داده است",
   data?: object | undefined | string
 ) => {
-  return NextResponse.json({ message, data }, { status: statusCode });
+  return NextResponse.json({ message, data, status: statusCode });
 };
 
 type ValidationError = {

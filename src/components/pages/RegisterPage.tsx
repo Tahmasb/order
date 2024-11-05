@@ -10,7 +10,7 @@ import InputNumber from "@elements/InputNumber";
 import { registerSchema } from "@utils/validations";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
 import { OptionItemType } from "../types";
-import myAxios from "@utils/axios";
+import { myAxios } from "@utils/axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "@redux/slices/message";
 import { useRouter } from "next/navigation";

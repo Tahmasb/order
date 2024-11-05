@@ -2,7 +2,7 @@
 import Button from "@elements/Button";
 import InputNumber from "@elements/InputNumber";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
-import myAxios from "@utils/axios";
+import { myAxios } from "@utils/axios";
 import { verifyPhoneCodeSchema } from "@utils/validations";
 import { useSearchParams } from "next/navigation";
 import {

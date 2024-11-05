@@ -1,6 +1,6 @@
 import { cn } from "@utils/style";
 import { useRef, useState, useEffect } from "react";
-import { useFormContext, Controller } from "react-hook-form";
+import { useFormContext, Controller, useWatch } from "react-hook-form";
 import { IoIosArrowDown, IoMdClose } from "react-icons/io";
 import { OptionItemType } from "../types";
 
@@ -130,6 +130,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               type="text"
               autoComplete="new-password"
               ref={inputRef}
+              value={field.value?.label || ""} // مقدار پیش‌فرض از field.value گرفته می‌شود
               onClick={() => setIsOpen(true)}
               onFocus={() => setIsOpen(true)}
               onChange={(e) => {

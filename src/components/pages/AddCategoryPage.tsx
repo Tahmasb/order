@@ -5,7 +5,7 @@ import Input from "@elements/Input";
 import SingleImageUploader from "@elements/SingleImageUploader";
 import ShowErrors from "@modules/ShowErrors";
 import { setMessage } from "@redux/slices/message";
-import myAxios from "@utils/axios";
+import { myAxios } from "@utils/axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
