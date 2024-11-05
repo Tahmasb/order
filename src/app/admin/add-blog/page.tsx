@@ -1,7 +1,7 @@
 import AddBlogPage from "@pages/AddBlogPage";
 
 const AddBlog = () => {
-  return <AddBlogPage />;
+  return <AddBlogPage blog={undefined} />;
 };
 
 export default AddBlog;
