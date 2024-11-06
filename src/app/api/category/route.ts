@@ -47,13 +47,31 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
+  const selectItems = req.nextUrl.searchParams.get("name");
+  const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+  const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+  const skip = (page - 1) * limit;
+
   await connectDB();
-  let categories;
-  if (searchParams.get("justLabel") === "1") {
-    categories = await Category.find().select("label").lean();
-  } else {
-    categories = await Category.find().lean();
-  }
-  return successResponse(200, "لیست دسته بندی‌ها", categories);
+
+  const totalCategories = await Category.countDocuments();
+
+  const categories = await Category.find()
+    .select(`${selectItems} href label`)
+    .sort({ createdAt: "desc" })
+    .skip(skip)
+    .limit(limit)
+    .lean();
+
+  const totalPages = Math.ceil(totalCategories / limit);
+
+  return successResponse(200, "لیست دسته بندی‌ها", {
+    categories,
+    pagination: {
+      page,
+      limit,
+      totalPages,
+      totalCategories,
+    },
+  });
 }

@@ -11,7 +11,9 @@ const myAxios = axios.create({
 });
 
 const getData = async (url: string) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    cache: "no-store",
+  });
   const data = await response.json();
   return data;
 };

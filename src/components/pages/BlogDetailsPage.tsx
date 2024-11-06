@@ -15,7 +15,7 @@ const BlogDetailsPage: React.FC<{ blog: BlogDataProps }> = ({ blog }) => {
     title,
   } = blog;
   return (
-    <div className="flex flex-col font-dana items-center my-7 gap-6 px-4">
+    <div className="flex flex-col font-dana items-center my-7 max-w-[1100px] mx-auto gap-6 px-4">
       <h1 className="font-semibold text-xl">{title}</h1>
       <Image
         src={image}

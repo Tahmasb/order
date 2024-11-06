@@ -1,4 +1,5 @@
 import Blog from "@models/Blog";
+import { Context } from "@myTypes/types";
 import {
   connectDB,
   errorResponse,
@@ -59,11 +60,33 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    const selectItems = req.nextUrl.searchParams.get("name");
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+    const skip = (page - 1) * limit;
+
     await connectDB();
+
+    const totalBlogs = await Blog.countDocuments({ published: true });
+
     const blogs = await Blog.find({ published: true })
-      .select("-updatedAt published")
-      .sort({ createdAt: "desc" });
-    return successResponse(200, "لیست وبلاگ", blogs);
+      .select(`${selectItems} href title`)
+      .sort({ createdAt: "desc" })
+      .skip(skip)
+      .limit(limit)
+      .lean();
+
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    return successResponse(200, "لیست وبلاگ", {
+      blogs,
+      pagination: {
+        page,
+        limit,
+        totalPages,
+        totalBlogs,
+      },
+    });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

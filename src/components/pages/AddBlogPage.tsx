@@ -23,9 +23,7 @@ import { useDispatch } from "react-redux";
 
 const Editor = dynamic(() => import("@modules/Editor"), { ssr: false });
 
-const AddBlogPage: React.FC<{ blog: BlogDataProps | undefined }> = ({
-  blog,
-}) => {
+const AddBlogPage: React.FC<{ blog?: BlogDataProps }> = ({ blog }) => {
   const [categories, setCategories] = useState([]);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const dispatch = useDispatch();
@@ -75,7 +73,7 @@ const AddBlogPage: React.FC<{ blog: BlogDataProps | undefined }> = ({
     if (blog) methods.reset(blog);
     myAxios("/category?justLabel=1")
       .then((res) => {
-        setCategories(res.data.data);
+        setCategories(res.data.data.categories);
       })
       .catch((error) => {
         console.log(error.response);
@@ -107,7 +105,7 @@ const AddBlogPage: React.FC<{ blog: BlogDataProps | undefined }> = ({
           <TextArea name="metaDescription" label="توضیحات متا" />
           <Editor name="main" control={methods.control} />
           <Button isLoading={isLoadingButton} type="submit">
-            افزودن وبلاگ
+            {blog ? "ویرایش وبلاگ" : "افزودن وبلاگ"}
           </Button>
         </form>
       </FormProvider>

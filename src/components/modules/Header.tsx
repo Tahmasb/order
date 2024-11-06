@@ -66,7 +66,7 @@ const Header = () => {
           className="w-72 py-3 px-5 h-full flex flex-col gap-4"
         >
           {logo}
-          <div className="flex flex-col child-hover:text-secondary-hover child:border-b child:py-3 child:flex child:items-center child:gap-2.5 child-hover:mr-2 child:transition-all child:duration-200">
+          <div className="flex flex-col child-hover:text-secondary-hover child:border-b child:py-3 child:flex child:items-center child:gap-2.5 child-hover:pr-2 child:transition-all child:duration-200">
             {headerItemsDrawer.map((link) => {
               const isCurrentItem = "/" + pathName.split("/")[1] === link.href;
               return (
