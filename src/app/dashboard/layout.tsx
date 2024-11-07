@@ -14,7 +14,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
   const session = await getServerSession();
   if (!session) redirect("/login");
   return (
-    <div className="grid grid-cols-12">
+    <div className="grid grid-cols-12 gap-1.5">
       <div className="border border-t-0 md:flex hidden  col-span-2 p-2 h-[80vh] pt-8 flex-col child:whitespace-nowrap child:text-sm">
         {dashboardSidebarItems.map((link) => {
           return (

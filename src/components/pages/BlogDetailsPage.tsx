@@ -28,7 +28,7 @@ const BlogDetailsPage: React.FC<{ blog: BlogDataProps }> = ({ blog }) => {
         <span className="text-gray-600">دسته بندی: </span>
         <span className="">{blog.category.label}</span>
       </Link>
-      <article>
+      <article className="my-5 w-full">
         <div dangerouslySetInnerHTML={{ __html: main }} />
       </article>
     </div>

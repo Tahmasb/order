@@ -1,6 +1,5 @@
-import { useMemo } from "react";
 import { useController, UseControllerProps } from "react-hook-form";
-import JoditEditor from "jodit-react";
+import { Editor } from "@tinymce/tinymce-react";
 
 interface RichTextEditorProps extends UseControllerProps {
   name: string;
@@ -12,26 +11,24 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
     fieldState: { error },
   } = useController({ name, control });
 
-  const config = useMemo(
-    () => ({
-      placeholder: "محتوای پست را تایپ کنید (ضروری)",
-      height: "500px",
-      language: "fa",
-      //@ts-ignore
-      direction: "rtl",
-      disablePlugins: ["video", "file", "about", "aiAssistant"],
-      hidePoweredByJodit: true,
-    }),
-    []
-  );
-
   return (
     <div className="w-full">
-      <JoditEditor
+      <Editor
+        apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
         value={value || ""}
-        onBlur={(newContent) => onChange(newContent)}
-        //@ts-ignore
-        config={config}
+        onEditorChange={(newContent) => onChange(newContent)}
+        init={{
+          placeholder: "محتوای پست را تایپ کنید (ضروری)",
+          language: "fa",
+          directionality: "rtl",
+          height: 500,
+          menubar: true,
+          block_formats:
+            "Header 3=h3; Header 4=h4; Header 5=h5; Header 6=h6; Paragraph=p",
+          plugins: "lists link image preview media code",
+          toolbar:
+            "media code undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image preview ",
+        }}
       />
       {error && <span className="text-sm text-error">{error.message}</span>}
     </div>
