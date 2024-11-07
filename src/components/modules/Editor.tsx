@@ -17,6 +17,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
       placeholder: "محتوای پست را تایپ کنید (ضروری)",
       height: "500px",
       language: "fa",
+      //@ts-ignore
+      direction: "rtl",
       disablePlugins: ["video", "file", "about", "aiAssistant"],
       hidePoweredByJodit: true,
     }),
@@ -28,6 +30,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
       <JoditEditor
         value={value || ""}
         onBlur={(newContent) => onChange(newContent)}
+        //@ts-ignore
         config={config}
       />
       {error && <span className="text-sm text-error">{error.message}</span>}

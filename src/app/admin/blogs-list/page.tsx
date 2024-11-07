@@ -15,7 +15,7 @@ const BlogsList: React.FC<{
 
   return (
     <div className="my-8 flex items-center gap-6 flex-col max-w-[600px] mx-auto px-1">
-      <h1 className="text-center font-bold">لیست مقالات تابلو باما</h1>
+      <h1 className="text-center font-bold">لیست وبلاگ‌ها</h1>
       <div className=" border w-full px-2 flex flex-col divide-y-2 child:h-10 rounded child:flex child:items-center">
         {blogs.map((item: { _id: string; href: string; title: string }) => {
           return (

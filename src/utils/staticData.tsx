@@ -5,6 +5,14 @@ import { GrInfo } from "react-icons/gr";
 import { MdSupportAgent } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 
+const adminSidebarItems = [
+  { href: "/admin/categories-list", label: "دسته بندی‌ها" },
+  { href: "/admin/blogs-list", label: "وبلاگ‌ها" },
+  { href: "/admin/add-blog", label: "افرودن وبلاگ" },
+  { href: "/admin/add-category", label: "افزودن دسته‌بندی" },
+  { href: "/dashboard", label: "داشبورد" },
+];
+
 const headerItems = [
   { href: "/", label: "صفحه اصلی" },
   { href: "/blogs", label: "وبلاگ" },
@@ -40,4 +48,10 @@ const costAmountOptions = [
   { id: 50_000_000, label: "بالای ۴۰ میلیون تومان" },
 ];
 
-export { headerItems, headerItemsDrawer, ordersType, costAmountOptions };
+export {
+  headerItems,
+  headerItemsDrawer,
+  ordersType,
+  costAmountOptions,
+  adminSidebarItems,
+};

@@ -55,7 +55,7 @@ const AddBlogPage: React.FC<{ blog?: BlogDataProps }> = ({ blog }) => {
         .post("/blogs", values)
         .then((res) => {
           dispatch(setMessage({ message: res.data.message }));
-          router.push(`/admin`);
+          router.push(`/admin/blogs-list`);
         })
         .catch((error) => {
           setIsLoadingButton(false);
