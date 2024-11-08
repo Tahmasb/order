@@ -46,6 +46,12 @@ const verifyPhoneCodeSchema = object().shape({
   code: string().required("ضروری"),
 });
 
+const addCommentValidationSchema = object().shape({
+  body: string()
+    .min(3, "متن کامنت  حداقل سه کاراکتر")
+    .required("متن کامنت ضروری است"),
+});
+
 const addCategorySchema = object().shape({
   label: string()
     .min(3, "عنوان دسته بندی حداقل ۳ کاراکتر")
@@ -91,4 +97,5 @@ export {
   addOrderSchema,
   verifyPhoneCodeSchema,
   addCategorySchema,
+  addCommentValidationSchema,
 };

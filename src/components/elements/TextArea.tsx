@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 type TextAreaProps = {
   name: string;
   label: string;
+  autoFocus?: boolean;
   rows?: number;
   className?: string;
 };
@@ -13,6 +14,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   label,
   className,
+  autoFocus = false,
   rows = 5,
 }) => {
   const {
@@ -23,15 +25,16 @@ const TextArea: React.FC<TextAreaProps> = ({
   return (
     <div
       className={cn(
-        "bg-white my-1 max-w-[18rem] flex  gap-3 flex-col relative w-full rounded-md",
+        "flex  gap-3 flex-col relative w-full  rounded-md",
         className || ""
       )}
     >
       <textarea
-        className="focus:border-primary hover:border-primary transition h-full border -mb-2.5 rounded-md w-full peer resize-none bg-transparent p-2 outline-none overflow-hidden"
+        className="focus:border-primary  hover:border-primary transition border  rounded-md w-full peer resize-none bg-transparent p-2 outline-none overflow-hidden"
         {...register(name)}
         rows={rows}
         placeholder=" "
+        autoFocus={autoFocus}
       />
       {errors[name] && (
         <small className="text-error mr-1">

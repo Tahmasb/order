@@ -29,6 +29,20 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = async ({
         })}
         <SignOut className="text-error" />
       </div>
+      <div className="col-span-12 flex-wrap my-3 md:hidden  flex gap-1 child:rounded child:h-9 child:p-1.5 child:border child:flex child:items-center  child:whitespace-nowrap child:text-sm">
+        {dashboardSidebarItems.map((link) => {
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hover:text-primary  h-10 w-min hover:pr-1.5 transition-all duration-200"
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+        <SignOut className="text-error" />
+      </div>
       <div className="w-full col-span-12 md:col-span-10">{children}</div>
     </div>
   );

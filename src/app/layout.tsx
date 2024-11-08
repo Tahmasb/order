@@ -28,7 +28,7 @@ export default function RootLayout({
         }}
       /> */}
       <body
-        className={`${fontDana.variable} min-h-screen font-dana flex flex-col  max-w-[1500px] mx-auto`}
+        className={`${fontDana.variable} text-black-1 min-h-screen font-dana flex flex-col  max-w-[1500px] mx-auto`}
       >
         <ReduxProvider>
           <NextAuthProvider>
