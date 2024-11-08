@@ -13,6 +13,11 @@ const adminSidebarItems = [
   { href: "/dashboard", label: "داشبورد" },
 ];
 
+const dashboardSidebarItems = [
+  { href: "/dashboard/add-order", label: "افزودن سفارش" },
+  { href: "/admin", label: "پنل ادمین" },
+];
+
 const headerItems = [
   { href: "/", label: "صفحه اصلی" },
   { href: "/blogs", label: "وبلاگ" },
@@ -54,4 +59,5 @@ export {
   ordersType,
   costAmountOptions,
   adminSidebarItems,
+  dashboardSidebarItems,
 };

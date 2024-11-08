@@ -16,7 +16,7 @@ function transformArray(items: Item[]): TransformedItem[] {
 }
 
 function cleanObject<T extends object>(obj: T): T {
-  const result: any = {};
+  const result: { [key: string]: unknown } = {}; // تایپ دقیق‌تری برای result
   Object.keys(obj).forEach((key) => {
     const value = obj[key as keyof T];
     if (
@@ -27,7 +27,7 @@ function cleanObject<T extends object>(obj: T): T {
       result[key] = value;
     }
   });
-  return result as T;
+  return result as T; // بازگرداندن نتیجه به نوع T
 }
 
 export { transformArray, cleanObject };

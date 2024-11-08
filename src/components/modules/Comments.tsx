@@ -24,7 +24,21 @@ type FormValues = {
   blogId: string;
 };
 
-const Comments: React.FC<{ blogId: string; comments: [] }> = ({
+interface User {
+  _id: string;
+  role: "ADMIN" | "USER";
+  fullName: string;
+}
+
+interface Comment {
+  _id: string;
+  userId: User;
+  body: string;
+  replays: Comment[];
+  createdAt: string; // یا Date، بستگی به نیاز شما دارد.
+}
+
+const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
   blogId,
   comments,
 }) => {
@@ -63,7 +77,12 @@ const Comments: React.FC<{ blogId: string; comments: [] }> = ({
     <div className="flex flex-col gap-4 w-full">
       <div className="flex justify-between items-center">
         <span className="font-semibold text-xl">نظرات</span>
-        <Button onClick={handleToggleShowCommentInput}>ایجاد نظر جدید</Button>
+        <Button
+          onClick={handleToggleShowCommentInput}
+          className={`${showCommentInput && "hidden"}`}
+        >
+          ایجاد نظر جدید
+        </Button>
       </div>
       {showCommentInput && (
         <FormProvider {...methods}>
