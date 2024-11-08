@@ -25,7 +25,10 @@ const successResponse = (
   message = "عملیات موفق",
   data?: object | undefined | string
 ) => {
-  return NextResponse.json({ data, message, status: statusCode });
+  return NextResponse.json(
+    { data, message, status: statusCode },
+    { status: statusCode }
+  );
 };
 
 const errorResponse = (
@@ -33,7 +36,10 @@ const errorResponse = (
   message = "مشکلی در سرور رخ داده است",
   data?: object | undefined | string
 ) => {
-  return NextResponse.json({ message, data, status: statusCode });
+  return NextResponse.json(
+    { message, data, status: statusCode },
+    { status: statusCode }
+  );
 };
 
 type ValidationError = {
@@ -60,7 +66,20 @@ async function yupValidateData<T extends yup.AnyObject>(
   }
 }
 
+function handleError(
+  error: unknown,
+  customMessage: string = "خطای ناشناخته‌ای رخ داده است"
+): Response {
+  if (error instanceof Error) {
+    console.log(error.message);
+    return errorResponse(500, error.message);
+  } else {
+    return errorResponse(500, customMessage);
+  }
+}
+
 export {
+  handleError,
   hashPassword,
   yupValidateData,
   verifyPassword,

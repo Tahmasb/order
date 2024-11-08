@@ -3,7 +3,10 @@ import { BlogDataProps } from "@myTypes/types";
 import Image from "next/image";
 import Link from "next/link";
 
-const BlogDetailsPage: React.FC<{ blog: BlogDataProps }> = ({ blog }) => {
+const BlogDetailsPage: React.FC<{ blog: BlogDataProps; comments: [] }> = ({
+  blog,
+  comments,
+}) => {
   const {
     _id,
     category,
@@ -38,7 +41,7 @@ const BlogDetailsPage: React.FC<{ blog: BlogDataProps }> = ({ blog }) => {
       <article className="my-5 w-full text-justify">
         <div dangerouslySetInnerHTML={{ __html: main }} />
       </article>
-      <Comments blogId={href} />
+      <Comments comments={comments} blogId={href} />
     </div>
   );
 };

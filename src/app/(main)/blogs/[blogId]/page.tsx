@@ -4,7 +4,10 @@ import { getData } from "@utils/axios";
 import Link from "next/link";
 
 const BlogDetails = async ({ params }: Context) => {
-  const blog = await getData(`/blogs/${params.blogId}`);
+  const blogHref = params.blogId;
+  const blog = await getData(`/blogs/${blogHref}`);
+  const comments = await getData(`/comment?blogId=${blogHref}`);
+
   if (!blog?.data)
     return (
       <div className="flex flex-col items-center mt-9 gap-8">
@@ -14,8 +17,7 @@ const BlogDetails = async ({ params }: Context) => {
         </Link>
       </div>
     );
-
-  return <BlogDetailsPage blog={blog.data} />;
+  return <BlogDetailsPage comments={comments.data} blog={blog.data} />;
 };
 
 export default BlogDetails;

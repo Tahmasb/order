@@ -3,6 +3,7 @@ import Comment from "@models/Comment";
 import {
   connectDB,
   errorResponse,
+  handleError,
   successResponse,
   yupValidateData,
 } from "@utils/backFuncs";
@@ -26,13 +27,15 @@ export async function POST(req: NextRequest) {
     if (validateBody !== true) {
       return errorResponse(400, "اطلاعات نامعتبر", validateBody);
     }
+
     const isExistBlog = await Blog.findOne({ href: blogId });
-    if (isExistBlog) return errorResponse(400, "وبلاگی با این آیدی یافت نشد");
+    if (!isExistBlog) return errorResponse(400, "وبلاگی با این آیدی یافت نشد");
+
     if (!replyId) {
       const newComment = await Comment.create({
         userId: session.user?.email,
         body,
-        blogId: new Schema.Types.ObjectId(blogId),
+        blogId: isExistBlog._id,
       });
       return successResponse(200, "کامنت با موفقیت ایجاد شد");
     } else {
@@ -49,5 +52,21 @@ export async function POST(req: NextRequest) {
     } else {
       return errorResponse(500, "خطای ناشناخته‌ای رخ داده است");
     }
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const searchParams = req.nextUrl.searchParams;
+    const blogHref = searchParams.get("blogId");
+    const blog = await Blog.findOne({ published: true, href: blogHref });
+    const comments = await Comment.find({ blogId: blog._id, published: true })
+      .lean()
+      .populate("userId", "fullName role")
+      .select("body createdAt replays");
+
+    return successResponse(200, "لیست کامنت‌ها", comments);
+  } catch (error) {
+    return handleError(error);
   }
 }

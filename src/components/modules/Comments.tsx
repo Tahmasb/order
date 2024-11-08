@@ -1,8 +1,12 @@
 "use client";
 import Button from "@elements/Button";
 import TextArea from "@elements/TextArea";
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
+import { setMessage } from "@redux/slices/message";
 import { myAxios } from "@utils/axios";
+import { convertTimestampToShamsi } from "@utils/date";
 import { cleanObject } from "@utils/formatData";
+import { addCommentValidationSchema } from "@utils/validations";
 import Image from "next/image";
 import { useState } from "react";
 import {
@@ -12,6 +16,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { BsReply } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 
 type FormValues = {
   body: string;
@@ -19,9 +24,13 @@ type FormValues = {
   blogId: string;
 };
 
-const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
+const Comments: React.FC<{ blogId: string; comments: [] }> = ({
+  blogId,
+  comments,
+}) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const dispatch = useDispatch();
   const handleToggleShowCommentInput = () =>
     setShowCommentInput(!showCommentInput);
   const methods = useForm<FormValues>({
@@ -30,13 +39,28 @@ const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
       blogId,
       body: "",
     },
+    resolver: yupResolver(addCommentValidationSchema),
   });
   const handleAddComment: SubmitHandler<FieldValues> = (values) => {
-    console.log(cleanObject(values));
-    // myAxios.post('/comments',)
+    const newValues = cleanObject(values);
+    myAxios
+      .post("/comment", newValues)
+      .then((res) => {
+        console.log("test 1 -> ", res.data);
+        dispatch(setMessage({ message: res.data.message }));
+      })
+      .catch((error) => {
+        setIsLoadingButton(false);
+        dispatch(
+          setMessage({
+            message: error.response.data.message,
+            severity: "error",
+          })
+        );
+      });
   };
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <div className="flex justify-between items-center">
         <span className="font-semibold text-xl">نظرات</span>
         <Button onClick={handleToggleShowCommentInput}>ایجاد نظر جدید</Button>
@@ -73,10 +97,10 @@ const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
         </FormProvider>
       )}
       <div className="flex gap-6 flex-col ">
-        {[1, 2, 3, 4, 5, 6].map((comment) => {
+        {comments.map((comment) => {
           return (
             <div
-              key={comment}
+              key={comment._id}
               className="border bg-[#f3f4f6] rounded-md p-1.5 gap-4 flex flex-col"
             >
               <div className="flex justify-between items-center border-b">
@@ -90,12 +114,14 @@ const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
                   />
                   <div className="flex flex-col gap-1">
                     <div className="flex gap-1.5 items-center">
-                      <span>محمد محمدی</span> |
+                      <span>{comment.userId.fullName}</span> |
                       <span className="text-sm text-secondary-active">
-                        ادمین
+                        {comment.userId.role}
                       </span>
                     </div>
-                    <span className="text-sm text-black-2">1403/04/12</span>
+                    <span className="text-sm text-black-2">
+                      {convertTimestampToShamsi(comment.createdAt)}
+                    </span>
                   </div>
                 </div>
                 <BsReply
@@ -106,16 +132,12 @@ const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
                   className="cursor-pointer text-xl"
                 />
               </div>
-              <span className="text-sm">
-                سلام من دوره جاوا اسکریپت رو گذرونم و میخواهم در ادامه میسر تایپ
-                اسکریپت هم یاد بگیرم. به نظر شما اول بهتره چند تا دوره فریم ورک
-                جاوا اسکریپت ببینم و بعد این دوره رو مشاهده کنم؟ یا فرقی نداره؟
-              </span>
+              <span className="text-sm">{comment.body}</span>
               <div className="flex  gap-3 flex-col">
-                {[1, 2, 3].map((comment) => {
+                {comment.replays.map((subComment) => {
                   return (
                     <div
-                      key={comment}
+                      key={subComment._id}
                       className="px-5 py-2 rounded border bg-[#e5e7eb] gap-3 flex flex-col"
                     >
                       <div className="flex gap-2.5 pb-1 border-b border-gray-300">
@@ -128,23 +150,18 @@ const Comments: React.FC<{ blogId: string }> = ({ blogId }) => {
                         />
                         <div className="flex flex-col gap-1">
                           <div className="flex gap-1.5 items-center">
-                            <span>محمد محمدی</span> |
+                            <span>{subComment.userId.fullName}</span> |
                             <span className="text-sm text-secondary-active">
-                              ادمین
+                              {subComment.userId.role}
                             </span>
                           </div>
                           <span className="text-sm text-black-2">
-                            1403/04/12
+                            {convertTimestampToShamsi(subComment.createdAt)}
                           </span>
                         </div>
                       </div>
 
-                      <span className="text-sm">
-                        سلام من دوره جاوا اسکریپت رو گذرونم و میخواهم در ادامه
-                        میسر تایپ اسکریپت هم یاد بگیرم. به نظر شما اول بهتره چند
-                        تا دوره فریم ورک جاوا اسکریپت ببینم و بعد این دوره رو
-                        مشاهده کنم؟ یا فرقی نداره؟
-                      </span>
+                      <span className="text-sm">{subComment.body}</span>
                     </div>
                   );
                 })}
