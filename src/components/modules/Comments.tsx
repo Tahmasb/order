@@ -8,6 +8,7 @@ import { convertTimestampToShamsi } from "@utils/date";
 import { cleanObject } from "@utils/formatData";
 import { addCommentValidationSchema } from "@utils/validations";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   FieldValues,
@@ -44,7 +45,9 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
 }) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const [replyUserName, setReplyUserName] = useState("");
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleToggleShowCommentInput = () =>
     setShowCommentInput(!showCommentInput);
   const methods = useForm<FormValues>({
@@ -60,7 +63,9 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
     myAxios
       .post("/comment", newValues)
       .then((res) => {
-        console.log("test 1 -> ", res.data);
+        router.refresh();
+        methods.reset();
+        handleToggleShowCommentInput();
         dispatch(setMessage({ message: res.data.message }));
       })
       .catch((error) => {
@@ -76,16 +81,26 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex justify-between items-center">
-        <span className="font-semibold text-xl">نظرات</span>
+        {!!comments.length && (
+          <span className="font-semibold text-xl">نظرات</span>
+        )}
+
         <Button
           onClick={handleToggleShowCommentInput}
+          size="small"
           className={`${showCommentInput && "hidden"}`}
         >
-          ایجاد نظر جدید
+          {comments.length ? "ایجاد نظر جدید" : "ایجاد اولین نظر"}
         </Button>
       </div>
       {showCommentInput && (
         <FormProvider {...methods}>
+          {replyUserName && (
+            <span className="text-sm">
+              <span>در حال پاسخ به </span>
+              <span className="text-secondary-active">{replyUserName}</span>
+            </span>
+          )}
           <form
             onSubmit={methods.handleSubmit(handleAddComment)}
             className="w-full flex flex-col gap-2"
@@ -98,7 +113,11 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
             />
             <div className="flex gap-3 mr-auto">
               <Button
-                onClick={handleToggleShowCommentInput}
+                onClick={() => {
+                  handleToggleShowCommentInput();
+                  setReplyUserName("");
+                  methods.setValue("replyId", "");
+                }}
                 className="w-28 h-9"
                 variant="outlined"
               >
@@ -135,7 +154,7 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
                     <div className="flex gap-1.5 items-center">
                       <span>{comment.userId.fullName}</span> |
                       <span className="text-sm text-secondary-active">
-                        {comment.userId.role}
+                        {comment.userId.role === "ADMIN" ? "ادمین" : "کاربر"}
                       </span>
                     </div>
                     <span className="text-sm text-black-2">
@@ -146,7 +165,8 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
                 <BsReply
                   onClick={() => {
                     setShowCommentInput(true);
-                    methods.setValue("replyId", "");
+                    setReplyUserName(comment.userId.fullName);
+                    methods.setValue("replyId", comment._id);
                   }}
                   className="cursor-pointer text-xl"
                 />
@@ -171,7 +191,9 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
                           <div className="flex gap-1.5 items-center">
                             <span>{subComment.userId.fullName}</span> |
                             <span className="text-sm text-secondary-active">
-                              {subComment.userId.role}
+                              {comment.userId.role === "ADMIN"
+                                ? "ادمین"
+                                : "کاربر"}
                             </span>
                           </div>
                           <span className="text-sm text-black-2">

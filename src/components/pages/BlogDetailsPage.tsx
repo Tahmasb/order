@@ -24,8 +24,9 @@ const BlogDetailsPage: React.FC<{ blog: BlogDataProps; comments: [] }> = ({
       <Image
         src={image}
         alt={title}
-        width={600}
-        height={400}
+        width={900}
+        priority
+        height={700}
         className="rounded max-w-full w-[800px]"
       />
       <div className="flex justify-between w-full">

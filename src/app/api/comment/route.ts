@@ -62,7 +62,8 @@ export async function GET(req: NextRequest) {
     const blog = await Blog.findOne({ published: true, href: blogHref });
     const comments = await Comment.find({ blogId: blog._id, published: true })
       .lean()
-      .populate("userId", "fullName role")
+      .populate("userId", "fullName role") // برای کاربر کامنت
+      .populate("replays.userId", "fullName role") // برای کاربرهای جواب‌ها (replays)
       .select("body createdAt replays");
 
     return successResponse(200, "لیست کامنت‌ها", comments);

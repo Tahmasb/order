@@ -21,7 +21,7 @@ const CategoriesList: React.FC<{
         {categories.map(
           (item: { _id: string; href: string; label: string }) => {
             return (
-              <Link href={`/admin/blogs-list/${item.href}`} key={item._id}>
+              <Link href={`/admin/categories-list/${item.href}`} key={item._id}>
                 {item.label}
               </Link>
             );

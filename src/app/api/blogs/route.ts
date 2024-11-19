@@ -1,5 +1,4 @@
 import Blog from "@models/Blog";
-import { Context } from "@myTypes/types";
 import {
   connectDB,
   errorResponse,
@@ -70,7 +69,8 @@ export async function GET(req: NextRequest) {
     const totalBlogs = await Blog.countDocuments({ published: true });
 
     const blogs = await Blog.find({ published: true })
-      .select(`${selectItems} href title`)
+      .select(" title href image category createdAt ")
+      .populate("category", "label href")
       .sort({ createdAt: "desc" })
       .skip(skip)
       .limit(limit)

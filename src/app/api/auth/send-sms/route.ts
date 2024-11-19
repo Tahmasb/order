@@ -1,7 +1,6 @@
 import OTP from "@models/Otp";
 import User from "@models/User";
 import { connectDB, errorResponse, successResponse } from "@utils/backFuncs";
-import sendSMS from "@utils/sendSms";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
