@@ -67,7 +67,6 @@ const addCategorySchema = object().shape({
 
 const addBlogSchemaFront = object().shape({
   image: string()
-    .url("لینک تصویر نامعتبر است")
     .matches(
       /\.(png|jpg|webp|jpeg)$/i,
       "فرمت تصویر باید jpg،jpeg، png یا webp باشد"

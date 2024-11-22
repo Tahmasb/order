@@ -34,7 +34,7 @@ const AddOrderPage = () => {
       .post("/request", values)
       .then((res) => {
         dispatch(setMessage({ message: res.data.message }));
-        router.push(`/verify?phone=${values.phone}`);
+        router.push(`/verify?phone=${values.phone}&incomingLink=add-order`);
       })
       .catch((error) => {
         setIsLoadingButton(false);

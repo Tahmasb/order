@@ -91,7 +91,9 @@ const AddBlogPage: React.FC<{ blog?: BlogDataProps }> = ({ blog }) => {
       <h1 className="heading text-center">صفحه افزودن وبلاگ</h1>
       <FormProvider {...methods}>
         <form
-          onSubmit={methods.handleSubmit(handleAddBlog)}
+          onSubmit={methods.handleSubmit(handleAddBlog, (errors) =>
+            console.log(errors)
+          )}
           className="flex flex-col gap-5 child:max-w-full items-center"
         >
           <SingleImageUploader name="image" label="تصویر اصلی مقاله" />

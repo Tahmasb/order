@@ -31,7 +31,7 @@ const Header = () => {
   const handleOpenDrawer = () => setDrawerOpen(true);
 
   return (
-    <header className=" z-20 shadow-lg bg-white sticky top-0 w-full border-b py-2.5 flex items-center justify-between px-4">
+    <header className=" z-[333333] shadow-lg bg-white sticky top-0 w-full border-b py-2.5 flex items-center justify-between px-4">
       {logo}
       <div className="md:flex hidden gap-5 lg:gap-8 child-hover:text-secondary-hover child:transition-all child:font-medium ">
         {headerItems.map((link) => {

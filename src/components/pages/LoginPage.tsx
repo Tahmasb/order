@@ -7,14 +7,14 @@ import { loginSchema } from "@utils/validations";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
-import { useAppDispatch } from "@hooks/redux";
 import { setMessage } from "@redux/slices/message";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
   const handleLogin = async (values: object) => {
     setIsLoadingButton(true);
@@ -23,11 +23,11 @@ const LoginPage = () => {
       ...values,
     });
     if (res?.error) {
+      console.log(res.error);
       setIsLoadingButton(false);
       dispatch(
         setMessage({
           message: res.error,
-
           severity: "error",
         })
       );

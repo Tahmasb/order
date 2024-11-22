@@ -1,10 +1,11 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@hooks/redux"; // مسیر مناسب را تنظیم کنید
+import { useAppSelector } from "@hooks/redux"; // مسیر مناسب را تنظیم کنید
 import { setMessage } from "@redux/slices/message";
 import Snackbar from "@elements/Snackbar";
+import { useDispatch } from "react-redux";
 
 export default function ElementOnAllPages() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const isShow = useAppSelector((state) => state.messages.isShow);
   const messageStatus = useAppSelector((state) => state.messages.severity);
   const message = useAppSelector((state) => state.messages.message);

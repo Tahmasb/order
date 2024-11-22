@@ -34,6 +34,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         {...register(name)}
         rows={rows}
         placeholder=" "
+        id={name}
         autoFocus={autoFocus}
       />
       {errors[name] && (
@@ -42,6 +43,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         </small>
       )}
       <label
+        htmlFor={name}
         className="
           absolute right-3 -top-3 text-black-2 transition-all duration-300
           text-sm bg-white rounded-md px-1  

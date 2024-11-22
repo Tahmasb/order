@@ -8,6 +8,8 @@ import {
   yupValidateData,
 } from "@utils/backFuncs";
 import { registerSchema } from "@utils/validations";
+import OTP from "@models/Otp";
+import sendSMS from "@utils/sendSms";
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,10 +40,16 @@ export async function POST(req: NextRequest) {
       state,
       city,
       password: hashedPassword,
-      phone: phone,
+      phone,
     });
 
-    return successResponse(201, "حساب کاربری ایجاد شد");
+    const code = Math.floor(10000 + Math.random() * 90000).toString();
+    const otp = await OTP.create({ phone, code });
+    const response = await sendSMS(phone, code);
+    if (response.status === 200) {
+      return successResponse(200, "کد تایید برای شما پیامک شد");
+    }
+    return errorResponse(500, "مشکلی در ارسال پیامک رخ داده است");
   } catch (err) {
     console.log(err);
     return errorResponse(500, "مشکلی در سرور رخ داده است");

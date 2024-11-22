@@ -25,9 +25,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
           menubar: true,
           block_formats:
             "Header 3=h3; Header 4=h4; Header 5=h5; Header 6=h6; Paragraph=p",
-          plugins: "lists link image preview media code",
+          plugins: "lists link image preview media code advlist",
           toolbar:
-            "media code undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image preview ",
+            "media code undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image preview | removeformat",
         }}
       />
       {error && <span className="text-sm text-error">{error.message}</span>}

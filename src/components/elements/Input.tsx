@@ -79,7 +79,6 @@ const Input: React.FC<InputProps> = ({
     <div className={cn(baseClassNames(), className)}>
       <input
         autoFocus={autoFocus}
-        autoComplete="off"
         disabled={disabled}
         type={type === "password" ? inputType : type}
         {...register(name)}

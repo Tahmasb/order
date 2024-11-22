@@ -26,17 +26,17 @@ const BlogDetailsPage: React.FC<{ blog: BlogDataProps; comments: [] }> = ({
         alt={title}
         width={900}
         priority
-        height={700}
-        className="rounded max-w-full w-[800px]"
+        height={600}
+        className="rounded max-w-full w-[700px] h-[470px]"
       />
       <div className="flex justify-between w-full">
         <div className="ml-auto ">
-          <span className="text-gray-600">دسته بندی: </span>
+          <span className="text-black-2">دسته بندی: </span>
           <span className="">{blog.category.label}</span>
         </div>
         <div className="text-sm flex items-center gap-1">
-          <span className="hidden md:flex">تاریخ انتشار:</span>
-          <span className=" text-black-2">1403/11/30</span>
+          <span className="hidden md:flex text-black-2">تاریخ انتشار:</span>
+          <span>1403/11/30</span>
         </div>
       </div>
       <article className="my-5 w-full text-justify">

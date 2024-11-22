@@ -4,7 +4,13 @@ import Button from "@elements/Button";
 import Input from "@elements/Input";
 import { cities, states } from "@utils/staticDataLarge";
 import Link from "next/link";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+  useWatch,
+} from "react-hook-form";
 import { useMemo, useState } from "react";
 import InputNumber from "@elements/InputNumber";
 import { registerSchema } from "@utils/validations";
@@ -31,16 +37,17 @@ const RegisterPage = () => {
     defaultValues: {
       state: null,
       city: null,
+      phone: "",
     },
     resolver: yupResolver(registerSchema),
   });
 
-  const handleRegister = (values: object) => {
+  const handleRegister: SubmitHandler<FieldValues> = (values) => {
     setIsLoadingButton(true);
     myAxios
       .post("/auth/register", values)
       .then((res) => {
-        router.push("/login");
+        router.push(`/verify?phone=${values.phone}&incomingLink=register`);
         dispatch(setMessage({ message: res.data.message }));
       })
       .catch((error) => {

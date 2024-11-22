@@ -86,3 +86,22 @@ export async function PATCH(req: NextRequest, context: Context) {
     }
   }
 }
+
+export async function DELETE(req: NextRequest, context: Context) {
+  try {
+    await connectDB();
+    const id = context.params.blogId;
+    const blog = await Blog.findOneAndDelete({ href: id });
+
+    if (!blog) return errorResponse(404, "وبلاگی با این آیدی یافت نشد");
+
+    return successResponse(200, "وبلاگ حذف شد");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      return errorResponse(500, error.message);
+    } else {
+      return errorResponse(500, "خطای ناشناخته‌ای رخ داده است");
+    }
+  }
+}

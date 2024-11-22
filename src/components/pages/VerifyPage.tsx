@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
 import { setMessage } from "@redux/slices/message";
 import { myAxios } from "@utils/axios";
 import { verifyPhoneCodeSchema } from "@utils/validations";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   FieldValues,
@@ -15,11 +15,13 @@ import {
 } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-const VerifyPage = () => {
+const VerifyPage: React.FC = () => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
   const searchParamsList = useSearchParams();
   const phone = searchParamsList.get("phone");
+  const incomingLink = searchParamsList.get("incomingLink");
   const methods = useForm({
     defaultValues: {
       phone,
@@ -29,12 +31,12 @@ const VerifyPage = () => {
   });
 
   const handleVerifyMobile: SubmitHandler<FieldValues> = (values) => {
-    console.log(values);
     setIsLoadingButton(true);
     myAxios
-      .post("/auth/send-sms", values)
+      .post(`/auth/send-sms?incomingLink=${incomingLink}`, values)
       .then((res) => {
         dispatch(setMessage({ message: res.data.message }));
+        router.push("/dashboard");
       })
       .catch((error) => {
         setIsLoadingButton(false);

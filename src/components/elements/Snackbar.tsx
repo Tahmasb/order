@@ -38,7 +38,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
 
   return (
     <div
-      className={`w-10/12 gap-2 max-w-72 transition fixed top-5 left-1/2 transform -translate-x-1/2 z-40 p-2 rounded shadow-lg text-white flex items-center space-x-4 ${severityClasses[severity]}`}
+      className={`w-10/12 z-[3333333] gap-2 max-w-72 transition fixed top-5 left-1/2 transform -translate-x-1/2 z-40 p-2 rounded shadow-lg text-white flex items-center space-x-4 ${severityClasses[severity]}`}
       role="alert"
     >
       <button onClick={onClose}>

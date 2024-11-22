@@ -5,6 +5,15 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    const incomingLink =
+      req.nextUrl.searchParams.get("incomingLink") || "register";
+
+    let message = "حساب شما با موفقیت ایجاد و فعال شد";
+
+    if (incomingLink === "add-order") {
+      message =
+        "تایید شد. کارشناسان ما در اسرع وقت برای مشاوره با شما تماس میگیرند";
+    }
     const { phone, code } = await req.json();
     await connectDB();
     const isCorrectCode = await OTP.findOne({ phone, code });
@@ -13,10 +22,7 @@ export async function POST(req: NextRequest) {
         { phone },
         { isActive: true }
       );
-      return successResponse(
-        201,
-        "تایید شد. کارشنانان ما در اسرع وقت برای مشاوره با شما تماس میگیرند"
-      );
+      return successResponse(201, message);
     } else {
       return errorResponse(400, "کد اشتباه است");
     }

@@ -59,7 +59,6 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const selectItems = req.nextUrl.searchParams.get("name");
     const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
     const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
     const skip = (page - 1) * limit;

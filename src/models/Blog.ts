@@ -10,10 +10,7 @@ const blogSchema = new Schema(
     href: {
       type: String,
       required: true,
-      index: {
-        unique: true,
-        sparse: false,
-      },
+      index: true,
     },
     metaDescription: {
       type: String,

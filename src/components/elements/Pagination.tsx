@@ -115,6 +115,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return pages;
   };
+  if (count === 0) return null;
 
   return (
     <div className={cn("flex items-center", className)}>
