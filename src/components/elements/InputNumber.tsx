@@ -105,9 +105,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         "
       />
       {errors[name] && (
-        <small className="text-error mr-1">
-          {String(errors[name].message)}
-        </small>
+        <small className="error-message">{String(errors[name].message)}</small>
       )}
       <label
         htmlFor={uniqueId}

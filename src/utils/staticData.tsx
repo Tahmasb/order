@@ -22,7 +22,7 @@ const headerItems = [
   { href: "/", label: "صفحه اصلی" },
   { href: "/blogs", label: "وبلاگ" },
   { href: "/about-us", label: "درباره ما" },
-  { href: "/contact-us", label: "تماس با ما" },
+  { href: "/contact-us", label: "تماس با‌ما" },
   { href: "/design", label: "طراحی آنلاین" },
 ];
 const headerItemsDrawer = [
@@ -31,7 +31,7 @@ const headerItemsDrawer = [
   { href: "/about-us", label: "درباره ما", icon: <GrInfo /> },
   { href: "/design", label: "طراحی آنلاین", icon: <MdDesignServices /> },
   { href: "/add-order", label: "سفارش تابلو", icon: <FaCartShopping /> },
-  { href: "/contact-us", label: "تماس با ما", icon: <MdSupportAgent /> },
+  { href: "/contact-us", label: "تماس با‌ما", icon: <MdSupportAgent /> },
 ];
 
 const ordersType = [

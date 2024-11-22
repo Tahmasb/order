@@ -1,4 +1,4 @@
-function convertTimestampToShamsi(timestamp: string) {
+function convertTimestampToSolar(timestamp: string) {
   const date = new Date(timestamp);
   const jalaliDate = date.toLocaleDateString("fa-IR", {
     year: "numeric",
@@ -8,4 +8,4 @@ function convertTimestampToShamsi(timestamp: string) {
   return jalaliDate;
 }
 
-export { convertTimestampToShamsi };
+export { convertTimestampToSolar };

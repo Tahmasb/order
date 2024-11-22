@@ -4,7 +4,7 @@ import TextArea from "@elements/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup.js";
 import { setMessage } from "@redux/slices/message";
 import { myAxios } from "@utils/axios";
-import { convertTimestampToShamsi } from "@utils/date";
+import { convertTimestampToSolar } from "@utils/date";
 import { cleanObject } from "@utils/formatData";
 import { addCommentValidationSchema } from "@utils/validations";
 import Image from "next/image";
@@ -158,7 +158,7 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
                       </span>
                     </div>
                     <span className="text-sm text-black-2">
-                      {convertTimestampToShamsi(comment.createdAt)}
+                      {convertTimestampToSolar(comment.createdAt)}
                     </span>
                   </div>
                 </div>
@@ -197,7 +197,7 @@ const Comments: React.FC<{ blogId: string; comments: Comment[] }> = ({
                             </span>
                           </div>
                           <span className="text-sm text-black-2">
-                            {convertTimestampToShamsi(subComment.createdAt)}
+                            {convertTimestampToSolar(subComment.createdAt)}
                           </span>
                         </div>
                       </div>

@@ -143,12 +143,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               placeholder=" "
               className="w-full h-full bg-transparent px-3 py-2 focus:outline-none focus:ring-0 rounded-md shadow-sm"
             />
-            {inputRef.current?.value && isOpen && (
-              <IoMdClose
-                className="absolute left-11 text-gray-500 top-[34%] cursor-pointer"
-                onClick={() => clearInput(field.onChange)}
-              />
-            )}
+
             {errors[name] && (
               <small className="text-error mr-1">
                 {String(errors[name].message)}

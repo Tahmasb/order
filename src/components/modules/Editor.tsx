@@ -30,7 +30,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ name, control }) => {
             "media code undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image preview | removeformat",
         }}
       />
-      {error && <span className="text-sm text-error">{error.message}</span>}
+      {error && <span className="error-message">{error.message}</span>}
     </div>
   );
 };

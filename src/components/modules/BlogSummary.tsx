@@ -1,4 +1,4 @@
-import { convertTimestampToShamsi } from "@utils/date";
+import { convertTimestampToSolar } from "@utils/date";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,7 +34,7 @@ const BlogSummary: React.FC<{ blogs: Blogs[] }> = ({ blogs }) => {
                 <p className="font-semibold">{blog.title}</p>
                 <div className="flex justify-between font-light">
                   <small>دسته بندی {blog.category.label}</small>
-                  <small>{convertTimestampToShamsi(blog.createdAt)}</small>
+                  <small>{convertTimestampToSolar(blog.createdAt)}</small>
                 </div>
               </div>
             </Link>

@@ -56,7 +56,7 @@ const LocationPicker: React.FC = () => {
   };
 
   return (
-    <div className="h-[80vh] w-full">
+    <div className="h-[65vh] w-full">
       <MapContainer
         center={[35.6892, 51.389]}
         zoom={13}

@@ -26,3 +26,7 @@
 .heading {
   @apply text-lg font-semibold whitespace-nowrap;
 }
+
+.error-message {
+  @apply text-error mr-1;
+}
